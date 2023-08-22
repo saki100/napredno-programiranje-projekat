@@ -1,0 +1,11 @@
+operation\trener\LogovanjeSOTest.class
+controller\ControllerTest.class
+operation\planIshrane\IzmeniPlanIshraneTest.class
+operation\clan\IzmeniClanaTest.class
+operation\clan\PretraziClanaTest.class
+operation\planIshrane\PretraziPlanoveIshraneTest.class
+operation\clan\ZapamtiClanaTest.class
+operation\trener\UcitajTrenereTest.class
+operation\clan\UcitajListuClanovaTest.class
+operation\clan\ObrisiClanaTest.class
+operation\planIshrane\DodajPlanIshraneTest.class
