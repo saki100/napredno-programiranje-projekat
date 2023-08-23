@@ -1,17 +1,14 @@
-package operation.planIshrane;
+package operation.planTreninga;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.LinkedList;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -19,28 +16,24 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedConstruction;
-import org.mockito.Mockito;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import domain.Clan;
-import domain.GenericEntity;
-import domain.PlanIshrane;
-import domain.TipPlanaIshrane;
-import domain.Trener;
+import domain.PlanTreninga;
+import domain.TipPlanaTreninga;
 import form.DBConfigModel;
-import operation.trener.UcitajTrenere;
-import repository.db.impl.RepositoryDBGeneric;
+import operation.planIshrane.IzmeniPlanIshrane;
 
-class PretraziPlanoveIshraneTest {
-
-	private static PretraziPlanoveIshrane pretraziPlanoveIshrane;
+class IzmeniPlanTreningaTest {
+	
+	private static IzmeniPlanTreninga izmeniPlanTreninga;
+	private PlanTreninga planTreninga;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 
-		pretraziPlanoveIshrane = new PretraziPlanoveIshrane();
+		izmeniPlanTreninga = new IzmeniPlanTreninga();
 
 		// setapovanje da se koristi test baza
 		DBConfigModel dbConfigModel = new DBConfigModel();
@@ -73,21 +66,47 @@ class PretraziPlanoveIshraneTest {
 		bufferedWriter.flush();
 		bufferedWriter.close();
 	}
-	
-	@Test
-	public void testExecute() throws Exception {
-		Clan clan = new Clan();
-		clan.setRbClana(5);
-		
-		pretraziPlanoveIshrane.execute(clan);
-		
-		List<PlanIshrane> vraceniPlanovi = pretraziPlanoveIshrane.getPlanoveIshrane();
-		
-		assertNotNull(vraceniPlanovi);
-		assertFalse(vraceniPlanovi.isEmpty());
-		assertEquals(1, vraceniPlanovi.size());
-		
-		assertEquals(5, vraceniPlanovi.get(0).getIshranaID());
-		assertEquals(TipPlanaIshrane.VEGETARIJANSKA, vraceniPlanovi.get(0).getTip());
+
+	@BeforeEach
+	void setUp() throws Exception {
+		planTreninga = new PlanTreninga();
 	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+		planTreninga = null;
+	}
+
+	@Test
+	void test() throws Exception {
+		Clan clan = new Clan();
+		clan.setRbClana(1);
+		
+		planTreninga.setTreningID(9);
+		planTreninga.setClan(clan);
+		planTreninga.setDatumOD(Date.from(LocalDate.of(2023, 10, 1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+		planTreninga.setDatumDO(Date.from(LocalDate.of(2023, 12, 15).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+		planTreninga.setTip(TipPlanaTreninga.AEROBIK);
+		
+		izmeniPlanTreninga.execute(planTreninga);
+		
+		PretraziPlanoveTreninga pretraziPlanoveTreninga = new PretraziPlanoveTreninga();
+		pretraziPlanoveTreninga.execute(clan);
+		List<PlanTreninga> vraceniPlanoviTreninga = pretraziPlanoveTreninga.getPlanovi();
+		
+		assertNotNull(vraceniPlanoviTreninga);
+		assertFalse(vraceniPlanoviTreninga.isEmpty());
+		assertEquals(1, vraceniPlanoviTreninga.size());
+		assertEquals(planTreninga.getTreningID(), vraceniPlanoviTreninga.get(0).getTreningID());
+		assertEquals(planTreninga.getTip(), vraceniPlanoviTreninga.get(0).getTip());
+		
+		Clan stariClan = new Clan();
+		stariClan.setRbClana(5);
+		planTreninga.setClan(stariClan);
+		planTreninga.setTip(TipPlanaTreninga.SPRAVE);
+		
+		izmeniPlanTreninga.execute(planTreninga);
+		
+	}
+
 }
