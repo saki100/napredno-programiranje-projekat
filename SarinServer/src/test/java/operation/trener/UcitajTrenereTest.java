@@ -2,6 +2,7 @@ package operation.trener;
 
 import domain.GenericEntity;
 import domain.Trener;
+import form.DBConfigModel;
 import repository.Repository;
 import repository.db.impl.RepositoryDBGeneric;
 
@@ -13,62 +14,74 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+import java.io.BufferedWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedConstruction;
 import org.mockito.Mockito;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class UcitajTrenereTest {
 
-	private UcitajTrenere ucitajTrenere;
+	private static UcitajTrenere ucitajTrenere;
 
-	@Test
-	public void testExecuteOperationThrowsException() throws Exception {
-		Trener trener = new Trener();
-
-		try (MockedConstruction<RepositoryDBGeneric> mocked = Mockito.mockConstruction(RepositoryDBGeneric.class,
-				(repository, context) -> {
-
-					when(repository.getAll(trener)).thenThrow(new RuntimeException());
-				})) {
-			ucitajTrenere = new UcitajTrenere();
-			assertThrows(RuntimeException.class, () -> ucitajTrenere.executeOperation(trener));
-
-			verify(mocked.constructed().get(0), times(1)).getAll(eq(trener));
-
-		}
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		ucitajTrenere=new UcitajTrenere();
+		
+		DBConfigModel dbConfigModel = new DBConfigModel();
+		dbConfigModel.setUrl("jdbc:mysql://localhost:3306/sportski_klub_test");
+		dbConfigModel.setUsername("root");
+		dbConfigModel.setPassword("");
+		ObjectMapper objectMapper = new ObjectMapper();
+    	
+    	BufferedWriter bufferedWriter =Files.newBufferedWriter(Paths.get("dbconfigJson.txt"), StandardOpenOption.TRUNCATE_EXISTING);
+    	bufferedWriter.write(objectMapper.writeValueAsString(dbConfigModel));
+    	bufferedWriter.flush();
+    	bufferedWriter.close();
 	}
 
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+		DBConfigModel dbConfigModel = new DBConfigModel();
+		dbConfigModel.setUrl("jdbc:mysql://localhost:3306/sportski_klub");
+		dbConfigModel.setUsername("root");
+		dbConfigModel.setPassword("");
+		ObjectMapper objectMapper = new ObjectMapper();
+    	
+    	BufferedWriter bufferedWriter =Files.newBufferedWriter(Paths.get("dbconfigJson.txt"), StandardOpenOption.TRUNCATE_EXISTING);
+    	bufferedWriter.write(objectMapper.writeValueAsString(dbConfigModel));
+    	bufferedWriter.flush();
+    	bufferedWriter.close();
+	}
+
+
 	@Test
-	public void testExecuteOepration() throws Exception {
-		Trener trener = new Trener();
-
-		try (MockedConstruction<RepositoryDBGeneric> mocked = Mockito.mockConstruction(RepositoryDBGeneric.class,
-				(repository, context) -> {
-
-					List<GenericEntity> listaZaVracanje = new LinkedList<>();
-					listaZaVracanje.add(new Trener(1, "Pera", "Peric", "Username", "Password"));
-
-					when(repository.getAll(trener)).thenReturn(listaZaVracanje);
-				})) {
-			ucitajTrenere = new UcitajTrenere();
-			ucitajTrenere.executeOperation(trener);
-			verify(mocked.constructed().get(0), times(1)).getAll(eq(trener));
-
-			List<Trener> vracenaLista = ucitajTrenere.getTreneri();
-
-			assertNotNull(vracenaLista);
-			assertFalse(vracenaLista.isEmpty());
-			assertEquals(1, vracenaLista.size());
-			assertEquals(1, vracenaLista.get(0).getId());
-			assertEquals("Pera", vracenaLista.get(0).getIme());
-			assertEquals("Peric", vracenaLista.get(0).getPrezime());
-			assertEquals("Username", vracenaLista.get(0).getUsername());
-			assertEquals("Password", vracenaLista.get(0).getPassword());
-		}
+	public void testExecute() throws Exception {
+		ucitajTrenere.execute(new Trener());
+		
+		List<Trener> vracenaLista = ucitajTrenere.getTreneri();
+		
+		assertNotNull(vracenaLista);
+		assertFalse(vracenaLista.isEmpty());
+		assertEquals(2, vracenaLista.size());
+		
+		assertEquals(1, vracenaLista.get(0).getId());
+		assertEquals("sara", vracenaLista.get(0).getIme());
+		assertEquals("spanovic", vracenaLista.get(0).getPrezime());
+		
+		assertEquals(2, vracenaLista.get(1).getId());
+		assertEquals("mica", vracenaLista.get(1).getIme());
+		assertEquals("micic", vracenaLista.get(1).getPrezime());
 	}
 }

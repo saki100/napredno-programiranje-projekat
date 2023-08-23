@@ -22,22 +22,24 @@ import form.DBConfigModel;
 
 class PretraziClanaTest {
 
-	private PretraziClana pretraziClana;
-	private static Clan clan;
-	
+	private static PretraziClana pretraziClana;
+	private Clan clan;
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		clan=new Clan();
+		pretraziClana = new PretraziClana();
+		
 		DBConfigModel dbConfigModel = new DBConfigModel();
 		dbConfigModel.setUrl("jdbc:mysql://localhost:3306/sportski_klub_test");
 		dbConfigModel.setUsername("root");
 		dbConfigModel.setPassword("");
 		ObjectMapper objectMapper = new ObjectMapper();
-    	
-    	BufferedWriter bufferedWriter =Files.newBufferedWriter(Paths.get("dbconfigJson.txt"), StandardOpenOption.TRUNCATE_EXISTING);
-    	bufferedWriter.write(objectMapper.writeValueAsString(dbConfigModel));
-    	bufferedWriter.flush();
-    	bufferedWriter.close();
+
+		BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get("dbconfigJson.txt"),
+				StandardOpenOption.TRUNCATE_EXISTING);
+		bufferedWriter.write(objectMapper.writeValueAsString(dbConfigModel));
+		bufferedWriter.flush();
+		bufferedWriter.close();
 	}
 
 	@AfterAll
@@ -47,48 +49,35 @@ class PretraziClanaTest {
 		dbConfigModel.setUsername("root");
 		dbConfigModel.setPassword("");
 		ObjectMapper objectMapper = new ObjectMapper();
-    	
-    	BufferedWriter bufferedWriter =Files.newBufferedWriter(Paths.get("dbconfigJson.txt"), StandardOpenOption.TRUNCATE_EXISTING);
-    	bufferedWriter.write(objectMapper.writeValueAsString(dbConfigModel));
-    	bufferedWriter.flush();
-    	bufferedWriter.close();
+
+		BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get("dbconfigJson.txt"),
+				StandardOpenOption.TRUNCATE_EXISTING);
+		bufferedWriter.write(objectMapper.writeValueAsString(dbConfigModel));
+		bufferedWriter.flush();
+		bufferedWriter.close();
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
-		pretraziClana=new PretraziClana();
+		clan = new Clan();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		pretraziClana=null;
+		clan = null;
 	}
 
 	@Test
-	void test() {
-	clan.setIme("Tea"); clan.setPrezime("Tomic");
-     try {
-		List<Clan> filtriranaLista=Controller.getInstance().getClanovePoUslovu(clan);
-		System.out.println("Broj pronadjenih clanova je: "+filtriranaLista.size());
-		for(Clan c:filtriranaLista) {
+	void test() throws Exception {
+		clan.setIme("Tea");
+		clan.setPrezime("Tomic");
+		List<Clan> filtriranaLista = Controller.getInstance().getClanovePoUslovu(clan);
+		System.out.println("Broj pronadjenih clanova je: " + filtriranaLista.size());
+		for (Clan c : filtriranaLista) {
 			assertEquals("Tea", c.getIme());
 			assertEquals("Tomic", c.getPrezime());
 		}
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-     
+
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
