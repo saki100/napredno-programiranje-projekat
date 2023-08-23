@@ -34,7 +34,7 @@ class ObrokTest {
 
 	@Test
 	void testKonstruktor() {
-		obrok=new Obrok(5L, "Palenta", 380);
+		obrok=new Obrok(5, "Palenta", 380);
 		
 		assertEquals(5L, obrok.getObrokID());
 		assertEquals("Palenta", obrok.getNaziv());

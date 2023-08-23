@@ -164,8 +164,8 @@ class IshranaTest {
 		when(rs.next()).thenReturn(true).thenReturn(true).thenReturn(false);
 	    
 		
-        Obrok obrok1=new Obrok(10l, "Tortilja sa piletinom",550);
-        Obrok obrok2=new Obrok(12l, "Palenta",380);
+        Obrok obrok1=new Obrok(10, "Tortilja sa piletinom",550);
+        Obrok obrok2=new Obrok(12, "Palenta",380);
 
         
 		when(rs.getLong("obrokID")).thenReturn(obrok1.getObrokID()).thenReturn(obrok2.getObrokID());
