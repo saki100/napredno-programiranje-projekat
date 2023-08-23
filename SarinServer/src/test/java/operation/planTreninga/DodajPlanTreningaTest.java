@@ -1,12 +1,6 @@
-package operation.planIshrane;
+package operation.planTreninga;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.io.BufferedWriter;
 import java.nio.file.Files;
@@ -14,7 +8,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -23,30 +16,27 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedConstruction;
-import org.mockito.Mockito;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import domain.Clan;
-import domain.Obrok;
 import domain.PlanIshrane;
+import domain.PlanTreninga;
 import domain.TipPlanaIshrane;
-import domain.Trener;
+import domain.TipPlanaTreninga;
 import form.DBConfigModel;
-import operation.obrok.DodajObrok;
-import operation.trener.UcitajTrenere;
+import operation.planIshrane.DodajPlanIshrane;
+import operation.planIshrane.PretraziPlanoveIshrane;
 import repository.db.DbConnectionFactory;
-import repository.db.impl.RepositoryDBGeneric;
 
-class DodajPlanIshraneTest {
+class DodajPlanTreningaTest {
 
-	private static DodajPlanIshrane dodajPlanIshrane;
-	private PlanIshrane planIshrane;
+	private static DodajPlanTreninga dodajPlanTreninga;
+	private PlanTreninga planTreninga;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		dodajPlanIshrane=new DodajPlanIshrane();
+		dodajPlanTreninga=new DodajPlanTreninga();
 		
 		DBConfigModel dbConfigModel = new DBConfigModel();
 		dbConfigModel.setUrl("jdbc:mysql://localhost:3306/sportski_klub_test");
@@ -76,12 +66,12 @@ class DodajPlanIshraneTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		planIshrane=new PlanIshrane();
+		planTreninga=new PlanTreninga();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		planIshrane=null;
+		planTreninga=null;
 	}
 
 	@Test
@@ -89,34 +79,29 @@ class DodajPlanIshraneTest {
 		try {
 			
 			Clan clan = new Clan();
-			clan.setRbClana(1l);
-			planIshrane.setClan(clan);
-			planIshrane.setTip(TipPlanaIshrane.BIO);
-			Date datumOd = new Date();
-			Date datumDo = new Date();
-			planIshrane.setDatumOd(datumOd);
-			planIshrane.setDatumDo(datumDo);
+			clan.setRbClana(1);
 			
-			dodajPlanIshrane.execute(planIshrane);
+			planTreninga.setClan(clan);
+			planTreninga.setDatumOD(new Date());
+			planTreninga.setDatumDO(new Date());
+			planTreninga.setTip(TipPlanaTreninga.AEROBIK);
 			
-			PretraziPlanoveIshrane pretraziPlanoveIshrane = new PretraziPlanoveIshrane();
-			pretraziPlanoveIshrane.execute(clan);
-			List<PlanIshrane> vraceniPlanoviIshrane = pretraziPlanoveIshrane.getPlanoveIshrane();
+			dodajPlanTreninga.execute(planTreninga);
 			
-			assertNotNull(vraceniPlanoviIshrane);
-			assertFalse(vraceniPlanoviIshrane.isEmpty());
-			assertEquals(1, vraceniPlanoviIshrane.size());
+			PretraziPlanoveTreninga pretraziPlanoveTreninga = new PretraziPlanoveTreninga();
+			pretraziPlanoveTreninga.execute(clan);
+			List<PlanTreninga> vraceniPlanoviTreninga = pretraziPlanoveTreninga.getPlanovi();
 			
-			PlanIshrane vraceniPlanIshrane = vraceniPlanoviIshrane.get(0);
+			assertNotNull(vraceniPlanoviTreninga);
+			assertFalse(vraceniPlanoviTreninga.isEmpty());
+			assertEquals(1, vraceniPlanoviTreninga.size());
+			assertEquals(planTreninga.getTreningID(), vraceniPlanoviTreninga.get(0).getTreningID());
+			assertEquals(planTreninga.getTip(), vraceniPlanoviTreninga.get(0).getTip());
 			
-			assertEquals(planIshrane.getIshranaID(), vraceniPlanIshrane.getIshranaID());
-			assertEquals(planIshrane.getTip(), vraceniPlanIshrane.getTip());
-			
-			String upit  = "Delete from planishrane where ishranaID=?";
+			String upit = "Delete from plantreninga where treningID=?";
 			PreparedStatement ps = DbConnectionFactory.getInstance().getConnection().prepareStatement(upit);
-			
-			ps.setLong(1, planIshrane.getIshranaID());
-			ps.execute();
+			ps.setLong(1, planTreninga.getTreningID());
+			ps.execute(); 
 			
 			DbConnectionFactory.getInstance().getConnection().commit();
 		}catch(Exception ex) {
@@ -126,4 +111,5 @@ class DodajPlanIshraneTest {
 			DbConnectionFactory.getInstance().disconnect();
 		}
 	}
+
 }

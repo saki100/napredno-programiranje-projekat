@@ -10,6 +10,8 @@ import operation.AbstractGenericOperation;
  */
 public class DodajIshranu extends AbstractGenericOperation{
 
+	
+	
     @Override
     protected void preconditions(Object param) throws Exception {
     }

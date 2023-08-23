@@ -1,48 +1,34 @@
-package operation.planIshrane;
+package operation.obrok;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedConstruction;
-import org.mockito.Mockito;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import domain.Clan;
-import domain.GenericEntity;
-import domain.PlanIshrane;
-import domain.TipPlanaIshrane;
-import domain.Trener;
+import domain.Ishrana;
+import domain.Obrok;
 import form.DBConfigModel;
-import operation.trener.UcitajTrenere;
-import repository.db.impl.RepositoryDBGeneric;
+import operation.clan.IzmeniClana;
 
-class PretraziPlanoveIshraneTest {
-
-	private static PretraziPlanoveIshrane pretraziPlanoveIshrane;
+class IzmeniObrokTest {
+	
+	private static IzmeniObrok izmeniObrok;
+	private Obrok obrok;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		izmeniObrok = new IzmeniObrok();
 
-		pretraziPlanoveIshrane = new PretraziPlanoveIshrane();
-
-		// setapovanje da se koristi test baza
 		DBConfigModel dbConfigModel = new DBConfigModel();
 		dbConfigModel.setUrl("jdbc:mysql://localhost:3306/sportski_klub_test");
 		dbConfigModel.setUsername("root");
@@ -54,13 +40,10 @@ class PretraziPlanoveIshraneTest {
 		bufferedWriter.write(objectMapper.writeValueAsString(dbConfigModel));
 		bufferedWriter.flush();
 		bufferedWriter.close();
-
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-
-		// setapovanje da se koristi prava baza
 		DBConfigModel dbConfigModel = new DBConfigModel();
 		dbConfigModel.setUrl("jdbc:mysql://localhost:3306/sportski_klub");
 		dbConfigModel.setUsername("root");
@@ -73,21 +56,37 @@ class PretraziPlanoveIshraneTest {
 		bufferedWriter.flush();
 		bufferedWriter.close();
 	}
-	
-	@Test
-	public void testExecute() throws Exception {
-		Clan clan = new Clan();
-		clan.setRbClana(5);
-		
-		pretraziPlanoveIshrane.execute(clan);
-		
-		List<PlanIshrane> vraceniPlanovi = pretraziPlanoveIshrane.getPlanoveIshrane();
-		
-		assertNotNull(vraceniPlanovi);
-		assertFalse(vraceniPlanovi.isEmpty());
-		assertEquals(1, vraceniPlanovi.size());
-		
-		assertEquals(5, vraceniPlanovi.get(0).getIshranaID());
-		assertEquals(TipPlanaIshrane.VEGETARIJANSKA, vraceniPlanovi.get(0).getTip());
+
+	@BeforeEach
+	void setUp() throws Exception {
+		obrok = new Obrok();
 	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+		obrok = null;
+	}
+
+	@Test
+	void test() throws Exception {
+		obrok.setObrokID(27);
+		obrok.setNaziv("Burger 2");
+		obrok.setKalorije(700);
+		
+		izmeniObrok.execute(obrok);
+		
+		PretraziObrok pretraziObrok = new PretraziObrok();
+		pretraziObrok.execute(obrok);
+		Obrok vraceniObrok = pretraziObrok.getO();
+		
+		assertNotNull(vraceniObrok);
+		assertEquals(27, vraceniObrok.getObrokID());
+		assertEquals("Burger 2", vraceniObrok.getNaziv());
+		assertEquals(700, vraceniObrok.getKalorije());
+		
+		obrok.setNaziv("Burger");
+		obrok.setKalorije(606);
+		izmeniObrok.execute(obrok);
+	}
+
 }

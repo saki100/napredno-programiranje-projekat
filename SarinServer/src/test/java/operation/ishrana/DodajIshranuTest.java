@@ -1,17 +1,16 @@
-package operation.clan;
+package operation.ishrana;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Properties;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -21,19 +20,25 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import domain.Clan;
-import domain.Grad;
+import domain.Dan;
+import domain.Ishrana;
+import domain.Obrok;
+import domain.PlanIshrane;
+import domain.VremeObroka;
 import form.DBConfigModel;
+import operation.obrok.PretraziObrok;
 import repository.db.DbConnectionFactory;
 
-class ZapamtiClanaTest {
+class DodajIshranuTest {
 
-	private static ZapamtiClana zapamtiClana;
-	private static Clan clan;
+	private static DodajIshranu dodajIshranu;
+	private Ishrana ishrana;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		zapamtiClana = new ZapamtiClana();
+
+		dodajIshranu = new DodajIshranu();
+
 		DBConfigModel dbConfigModel = new DBConfigModel();
 		dbConfigModel.setUrl("jdbc:mysql://localhost:3306/sportski_klub_test");
 		dbConfigModel.setUsername("root");
@@ -45,7 +50,6 @@ class ZapamtiClanaTest {
 		bufferedWriter.write(objectMapper.writeValueAsString(dbConfigModel));
 		bufferedWriter.flush();
 		bufferedWriter.close();
-
 	}
 
 	@AfterAll
@@ -65,45 +69,52 @@ class ZapamtiClanaTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		clan = new Clan();
+		ishrana = new Ishrana();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		clan = null;
-	}
-
-	@Test
-	void testPreconditionsNeispravanBrTel() {
-		assertThrows(java.lang.Exception.class, () -> zapamtiClana.preconditions(new domain.Clan()));
+		ishrana = null;
 	}
 
 	@Test
 	void testExecute() throws Exception {
-		clan.setIme("Novi");
-		clan.setPrezime("Clan");
-		clan.setBrojTelefona(new String("0656000168"));
-		Calendar kalendar = new GregorianCalendar(2002, 7, 11);
-		Date datum = kalendar.getTime();
-		clan.setDatumRodjenja(datum);
-		Grad grad = new Grad(1, "Beograd");
-		clan.setGrad(grad);
 
-		zapamtiClana.execute(clan);
+		try {
+			PlanIshrane planIsh = new PlanIshrane();
+			planIsh.setIshranaID(6L);
+			
+			Obrok o = new Obrok();
+			o.setObrokID(3L);
 
-		Clan zapamceniClan = (Clan) zapamtiClana.getClan();
+			ishrana = new Ishrana(planIsh, o, VremeObroka.RUCAK, Dan.CETVRTAK);
 
-		assertNotNull(zapamceniClan);
-		assertEquals(clan.getIme(), zapamceniClan.getIme());
-		assertEquals(clan.getPrezime(), zapamceniClan.getPrezime());
-		assertEquals(clan.getBrojTelefona(), zapamceniClan.getBrojTelefona());
-		assertEquals(clan.getDatumRodjenja(), zapamceniClan.getDatumRodjenja());
-
-		ObrisiClana obrisiClana = new ObrisiClana();
-		obrisiClana.execute(zapamceniClan);
-
-		DbConnectionFactory.getInstance().getConnection().commit();
-
+			dodajIshranu.execute(ishrana);
+						
+			String upit = "Select * from ishrana where planIshraneID=? and obrokID=? and vreme=? and dan=?";
+			PreparedStatement ps = DbConnectionFactory.getInstance().getConnection().prepareStatement(upit);
+			ps.setLong(1, planIsh.getIshranaID());
+			ps.setLong(2, o.getObrokID());
+			ps.setString(3, VremeObroka.RUCAK.name());
+			ps.setString(4, Dan.CETVRTAK.name());
+			ResultSet rs = ps.executeQuery();
+			
+			assertTrue(rs.next());
+			
+			String upitDelete = "Delete from ishrana where planIshraneID=? and obrokID=? and vreme=? and dan=?";
+			ps = DbConnectionFactory.getInstance().getConnection().prepareStatement(upitDelete);
+			ps.setLong(1, planIsh.getIshranaID());
+			ps.setLong(2, o.getObrokID());
+			ps.setString(3, VremeObroka.RUCAK.name());
+			ps.setString(4, Dan.CETVRTAK.name());
+			ps.execute();
+			DbConnectionFactory.getInstance().getConnection().commit();
+		}catch(Exception ex) {
+			DbConnectionFactory.getInstance().getConnection().rollback();
+			throw ex;
+		}finally {
+			DbConnectionFactory.getInstance().disconnect();
+		}
 	}
 
 }
