@@ -70,12 +70,15 @@ public class Trener implements GenericEntity{
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Trener{" + "ime=" + ime + ", prezime=" + prezime + ", username=" + username + '}';
-    }
+    
 
     @Override
+	public String toString() {
+		return "Trener [id=" + id + ", ime=" + ime + ", prezime=" + prezime + ", username=" + username + ", password="
+				+ password + "]";
+	}
+
+	@Override
     public String getTableName() {
         
         return "trener";

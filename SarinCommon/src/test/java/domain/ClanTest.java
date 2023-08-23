@@ -195,5 +195,6 @@ class ClanTest {
 
 		String ocekivaniRezultat = "ime = '" + "Pera" + "', prezime='" + "Peric" + "'"+", email = '" + "pera@gmail.com" 
 	               + "', datumRodjenja='" +sdf.format(datumRodjenja)+"'"  + " , brojTelefona='" + "+3811234567"+ "', gradID="+grad.getGradID();
+		assertEquals(ocekivaniRezultat, clan.getConditionSetEdit());
 	}
 }
