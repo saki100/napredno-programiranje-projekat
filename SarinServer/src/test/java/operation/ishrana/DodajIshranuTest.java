@@ -1,4 +1,4 @@
-package operation.clan;
+package operation.ishrana;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -16,18 +17,24 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import controller.Controller;
-import domain.Clan;
+import domain.Dan;
+import domain.Ishrana;
+import domain.Obrok;
+import domain.PlanIshrane;
+import domain.VremeObroka;
 import form.DBConfigModel;
+import operation.obrok.PretraziObrok;
 
-class PretraziClanaTest {
-
-	private PretraziClana pretraziClana;
-	private static Clan clan;
+class DodajIshranuTest {
 	
+	private DodajIshranu dodajIshranu;
+	private static Ishrana ishrana;
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		clan=new Clan();
+		
+		ishrana=new Ishrana();
+		
 		DBConfigModel dbConfigModel = new DBConfigModel();
 		dbConfigModel.setUrl("jdbc:mysql://localhost:3306/sportski_klub_test");
 		dbConfigModel.setUsername("root");
@@ -56,31 +63,43 @@ class PretraziClanaTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		pretraziClana=new PretraziClana();
+		dodajIshranu=new DodajIshranu();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		pretraziClana=null;
+		dodajIshranu=null;
 	}
 
 	@Test
-	void test() {
-	clan.setIme("Tea"); clan.setPrezime("Tomic");
-     try {
-		List<Clan> filtriranaLista=Controller.getInstance().getClanovePoUslovu(clan);
-		System.out.println("Broj pronadjenih clanova je: "+filtriranaLista.size());
-		for(Clan c:filtriranaLista) {
-			assertEquals("Tea", c.getIme());
-			assertEquals("Tomic", c.getPrezime());
-		}
+	void testExecute() {
+		 try {
+      PlanIshrane planIsh=new PlanIshrane(); planIsh.setIshranaID(6L);
+      Obrok o=new Obrok(); o.setObrokID(3L); 
+      PretraziObrok pretraziObrok=new PretraziObrok();
+      pretraziObrok.execute(o);
+      o=pretraziObrok.getO();
+      System.out.println("Obrok je: "+o);
+      ishrana=new Ishrana(planIsh, o, VremeObroka.RUCAK,Dan.CETVRTAK);
+      
+     
+		dodajIshranu.execute(ishrana);
+		PretraziIshrane pretraziIsh=new PretraziIshrane();
+		pretraziIsh.execute(ishrana);
+		List<Ishrana> lista=new LinkedList<>();
+		lista=pretraziIsh.getIshrane();
+
+		assertEquals(1, lista.size());
+		System.out.println(lista.get(0));
+		assertEquals(VremeObroka.RUCAK, lista.get(0).getVreme());
+		assertEquals(Dan.CETVRTAK, lista.get(0).getDan());
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-     
 	}
 
+	
 	
 	
 	
