@@ -95,14 +95,5 @@
     <version>2.15.2</version>
 </dependency>
 
-	
-	
-  	<dependency>
-	    <groupId>rs.ac.bg.fon</groupId>
-	    <artifactId>SarinCommon</artifactId>
-	    <version>0.0.1-SNAPSHOT</version>
-	    <scope>system</scope>
-	    <systemPath>${project.basedir}/../SarinCommon/target/SarinCommon-0.0.1-SNAPSHOT.jar</systemPath>
-	</dependency>
   </dependencies>
 </project>
