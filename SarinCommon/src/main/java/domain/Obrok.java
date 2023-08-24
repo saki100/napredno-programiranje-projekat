@@ -18,7 +18,7 @@ public class Obrok implements GenericEntity{
     public Obrok() {
     }
 
-    public Obrok(int obrokID, String naziv, int kalorije) {
+    public Obrok(long obrokID, String naziv, int kalorije) {
         this.obrokID = obrokID;
         this.naziv = naziv;
         this.kalorije = kalorije;
@@ -64,7 +64,6 @@ public class Obrok implements GenericEntity{
     }
 
     
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -128,7 +127,7 @@ public class Obrok implements GenericEntity{
             kalorije = rs.getInt("kalorije");
             return this;
         }
-        throw new Exception("Trener ne postoji u bazi!");
+        throw new Exception("Obrok ne postoji u bazi!");
     }
 
     @Override
