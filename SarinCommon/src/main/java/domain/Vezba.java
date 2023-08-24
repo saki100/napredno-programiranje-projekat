@@ -5,6 +5,7 @@
 package domain;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,12 +48,12 @@ public class Vezba implements GenericEntity{
 
     @Override
     public String getTableName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return "vezba";
     }
 
     @Override
     public String getColumnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      return null;
     }
 
     @Override
@@ -67,7 +68,17 @@ public class Vezba implements GenericEntity{
 
     @Override
     public List<GenericEntity> createObjectRS(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+          List<GenericEntity> lista=new ArrayList<>();
+        
+        while(rs.next()){
+        	Vezba vezba=new Vezba();
+        	
+        	vezba.setVezbaID(rs.getLong("vezbaID"));
+        	vezba.setNaziv(rs.getString("naziv"));
+        	lista.add(vezba);
+        	
+        }
+        return lista;
     }
 
     @Override

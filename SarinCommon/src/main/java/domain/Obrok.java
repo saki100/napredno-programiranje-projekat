@@ -64,7 +64,6 @@ public class Obrok implements GenericEntity{
     }
 
     
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

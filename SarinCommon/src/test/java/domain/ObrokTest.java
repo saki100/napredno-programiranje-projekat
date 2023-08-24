@@ -14,7 +14,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mockito;
+
 
 class ObrokTest {
 
@@ -67,6 +70,19 @@ class ObrokTest {
 	@Test
 	public void testGetColumnNamesForInsert() {
 		assertEquals("naziv,kalorije", obrok.getColumnNamesForInsert());
+	}
+	@ParameterizedTest
+	@CsvSource ({
+		"Supica, Supica, true",
+		"Supica, Kajgana, false",
+	})
+	void testEquals(String n1, String n2, boolean equals) {
+		obrok.setNaziv(n1);
+		
+		Obrok obrok2 = new Obrok();
+		obrok2.setNaziv(n2);
+		
+		assertEquals(equals, obrok.equals(obrok2));
 	}
 	@Test
 	public void testGetInsertValues() {

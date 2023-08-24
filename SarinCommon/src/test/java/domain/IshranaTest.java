@@ -74,6 +74,13 @@ class IshranaTest {
 	}
    
 	@Test
+	public void getPlanIshrane() {
+		PlanIshrane planIsh=new PlanIshrane();
+		ishrana.setPlanIshrane(planIsh);
+		assertEquals(planIsh, ishrana.getPlanIshrane());
+	}
+	
+	@Test
 	public void testGetObrok() {
 		 Obrok obrok=new Obrok(123, "Tortilja sa piletinom",550);
 	        ishrana.setObrok(obrok);
