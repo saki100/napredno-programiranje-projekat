@@ -5,6 +5,7 @@ import domain.Clan;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja menja podatke o odredjenom clanu u bazi podataka.
  *
  * @author Sara
  */

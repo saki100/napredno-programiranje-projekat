@@ -5,6 +5,7 @@ import domain.PlanTreninga;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja dodaje novi Plan treninga u bazu podataka.
  *
  * @author Sara
  */

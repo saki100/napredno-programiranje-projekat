@@ -5,6 +5,8 @@ import domain.PlanIshrane;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja menja podatke o odredjenom Planu ishrane u bazi podataka,
+ * odnosno vrsi izmene nekih od atributa objekta klase PlanIshrane.
  *
  * @author Sara
  */

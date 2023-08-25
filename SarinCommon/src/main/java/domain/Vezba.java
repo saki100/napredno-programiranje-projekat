@@ -9,38 +9,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Predstavlja vezbu koji ce se izvoditi u odredjenom planu treninga za clanove sportskog kluba.
+ * Vezba ima svoj id i naziv.
+ * 
  * @author Sara
  */
 public class Vezba implements GenericEntity{
-    
+    /**
+     * Id vezbe.
+     */
     private long vezbaID;
+    /**
+     * Naziv vezbe.
+     */
     private String naziv;
-
+    /**
+     *  Neparametrizovani konstruktor koji pravi novu praznu vezbu.
+     */
     public Vezba() {
     }
-
+   /**
+    * Parametrizovani konstruktor koji inicijalizuje vezbu i 
+    * postavlja joj prosledjene vrednosti.
+    * 
+    * @param vezbaID   Id vezbe kao Long.
+    * @param naziv     Naziv vezbe kao String.
+    */
     public Vezba(long vezbaID, String naziv) {
         this.vezbaID = vezbaID;
         this.naziv = naziv;
     }
-
+    /**
+     * Vraca id vezbe.
+     * 
+     * @return Id vezbe kao Long.
+     */
     public long getVezbaID() {
         return vezbaID;
     }
-
+    /**
+     * Postavlja id vezbe.
+     * 
+     * @param vezbaID Id vezbe kao Long.
+     */
     public void setVezbaID(long vezbaID) {
         this.vezbaID = vezbaID;
     }
-
+    /**
+     * Vraca naziv vezbe kao String.
+     * 
+     * @return Naziv vezbe kao String.
+     */
     public String getNaziv() {
         return naziv;
     }
-
+    /**
+     * Postavlja naziv vezbe.
+     * 
+     * @param naziv Naziv vezbe kao String.
+     */
     public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
-
+    /**
+     * Vraca String o nazivu vezbe.
+     * 
+     * @return Naziv vezbe kao String.
+     */
     @Override
     public String toString() {
         return  naziv ;

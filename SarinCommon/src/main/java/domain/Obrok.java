@@ -7,47 +7,95 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Predstavlja obrok koji ce se koristiti u odredjenom planu ishrane za clanove sportskog kluba.
+ * Obrok ima svoj id, naziv i kalorije.
  *
  * @author Sara
  */
 public class Obrok implements GenericEntity{
+	/**
+	 * Id obroka.
+	 */
     private long obrokID;
+    /**
+     * Naziv obroka.
+     */
     private String naziv;
+    /**
+     * Kalorije koje obrok sadrzi.
+     */
     private int kalorije;
-
+    /**
+     *  Neparametrizovani konstruktor koji pravi nov prazan obrok.
+     */
     public Obrok() {
     }
-
+   /**
+    * Parametrizovani konstruktor koji inicijalizuje obrok i 
+     * postavlja mu prosledjene vrednosti.
+     * 
+    * @param obrokID    ID obroka kao Long.
+    * @param naziv      Naziv obroka kao String.
+    * @param kalorije   Kalorije koje obrok sadrzi kao int.
+    */
     public Obrok(long obrokID, String naziv, int kalorije) {
         this.obrokID = obrokID;
         this.naziv = naziv;
         this.kalorije = kalorije;
     }
-
+   /**
+    * Vraca kalorije koje obrok sadrzi.
+    * 
+    * @return Kalorije obroka kao int.
+    */
     public int getKalorije() {
         return kalorije;
     }
-
+    /**
+     * Postavlja kalorije obroka.
+     * 
+     * @param kalorije Kalorije kao int.
+     */
     public void setKalorije(int kalorije) {
         this.kalorije = kalorije;
     }
-
+    /**
+     * Vraca id obroka.
+     * 
+     * @return Id obroka kao Long.
+     */
     public long getObrokID() {
         return obrokID;
     }
-
+    /**
+     * Postavlja id obroka.
+     * 
+     * @param obrokID Id obroka kao Long.
+     */
     public void setObrokID(long obrokID) {
         this.obrokID = obrokID;
     }
-
+    /**
+     * Vraca naziv obroka kao String.
+     * 
+     * @return Naziv obroka kao String.
+     */
     public String getNaziv() {
         return naziv;
     }
-
+    /**
+     * Postavlja naziv obroka.
+     * 
+     * @param naziv Naziv obroka kao String.
+     */
     public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
-
+    /**
+     * Vraca String o nazivu obroka.
+     * 
+     * @return Naziv obroka kao String.
+     */
     @Override
     public String toString() {
         return  naziv ;
@@ -63,7 +111,13 @@ public class Obrok implements GenericEntity{
         return "naziv,kalorije";
     }
 
-    
+    /**
+     * Poredi dva obroka po nazivu i kalorijama.
+     * 
+     * @param obj Drugi obrok.
+     * 
+     * @return true ako su naziv i kalorije isti, a false inace.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

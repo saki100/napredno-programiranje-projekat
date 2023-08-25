@@ -5,6 +5,7 @@ import domain.Ishrana;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja dodaje novu Ishranu u bazu podataka.
  *
  * @author Sara
  */

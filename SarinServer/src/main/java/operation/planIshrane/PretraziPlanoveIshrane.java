@@ -7,11 +7,15 @@ import java.util.List;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja pretrazuje Planove ishrane po odredjenom uslovu iz baze podataka 
+ * i vraca kao listu samo one koji ispunjavaju uslove.
  *
  * @author Sara
  */
 public class PretraziPlanoveIshrane extends AbstractGenericOperation{
-    
+	/**
+     * Lista Planova ishrane koja ce cuvati rezultat operacije.
+     */
     List<PlanIshrane> planovi;
 
     @Override
@@ -26,6 +30,11 @@ public class PretraziPlanoveIshrane extends AbstractGenericOperation{
          planovi=repository.getAllCondition(plan);
          
     }
+    /**
+     * Vraca listu Planova ishrane koja predstavlja rezultat izvrsenja sistemske operacije.
+     * 
+     * @return Listu Planova ishrane.
+     */
     public List<PlanIshrane> getPlanoveIshrane(){
         return planovi;
     }
