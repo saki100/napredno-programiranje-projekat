@@ -5,6 +5,7 @@ import domain.Ishrana;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja menja podatke o Ishrani, odnosno neke od atributa objekta klase Ishrana.
  *
  * @author Sara
  */

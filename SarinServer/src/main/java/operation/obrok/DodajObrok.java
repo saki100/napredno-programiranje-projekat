@@ -5,6 +5,7 @@ import domain.Obrok;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja dodaje novi Obrok u bazu podataka.
  *
  * @author Sara
  */

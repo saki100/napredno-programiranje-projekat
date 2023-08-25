@@ -3,34 +3,69 @@ package domain;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Predstavlja grad u kome clan sportskog kluba zivi.
+ * Grad ima svoj id i naziv.
+ * 
+ * @author Sara
+ *
+ */
 public class Grad implements GenericEntity{
-	
+	/**
+	 * Id grada.
+	 */
 	private long gradID;
+	/**
+	 * Naziv grada.
+	 */
 	private String nazivGrada;
-	
+	/**
+     *  Neparametrizovani konstruktor koji pravi nov prazan grad.
+     */
 	public Grad() {
 		
 	}
-	
+	/**
+	 * Parametrizovani konstruktor koji inicijalizuje grad i 
+     * postavlja mu prosledjene vrednosti.
+     * 
+	 * @param gradID      Id grada kao Long.
+	 * @param nazivGrada  Naziv grada kao String.
+	 */
 	public Grad(long gradID, String nazivGrada) {
 		this.gradID = gradID;
 		this.nazivGrada = nazivGrada;
 	}
 
-	
+	/**
+	 * Vraca id grada.
+	 * 
+	 * @return Id grada kao Long.
+	 */
 	public long getGradID() {
 		return gradID;
 	}
-
+    /**
+     * Postavlja id grada.
+     * 
+     * @param gradID Id grada kao Long.
+     */
 	public void setGradID(long gradID) {
 		this.gradID = gradID;
 	}
-
+   /**
+    * Vraca naziv grada.
+    * 
+    * @return Naziv grada kao String.
+    */
 	public String getNazivGrada() {
 		return nazivGrada;
 	}
-
+   /**
+    * Postavlja naziv grada.
+    * 
+    * @param nazivGrada Naziv grada kao String.
+    */
 	public void setNazivGrada(String nazivGrada) {
 		this.nazivGrada = nazivGrada;
 	}

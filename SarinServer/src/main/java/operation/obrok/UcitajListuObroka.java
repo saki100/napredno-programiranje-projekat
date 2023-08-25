@@ -6,11 +6,14 @@ import java.util.List;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja vraca sve Obroke iz baze podataka.
  *
  * @author Sara
  */
 public class UcitajListuObroka extends AbstractGenericOperation {
-
+     /**
+      * Lista Obroka koja ce cuvati rezultat operacije.
+      */
     private List<Obrok> obroci;
     
     @Override
@@ -21,7 +24,11 @@ public class UcitajListuObroka extends AbstractGenericOperation {
     protected void executeOperation(Object param) throws Exception {
      obroci=repository.getAll((Obrok)param);
     }
-
+    /**
+     * Vraca listu Obroka koja predstavlja rezultat izvrsenja sistemske operacije.
+     * 
+     * @return Listu Obroka.
+     */
     public List<Obrok> getObroci() {
         return obroci;
     }

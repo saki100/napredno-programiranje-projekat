@@ -8,21 +8,51 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Predstavlja plan ishrane za odredjenog clana sportskog kluba.
+ * Plan ishrane ima svoj id, tip, datum od kada vazi i datum do kada traje, zatim clana za koga se izradjuje i status.
  *
  * @author Sara
  */
 public class PlanIshrane implements GenericEntity{
-    
+    /**
+     * Id plana ishrane.
+     */
     private long ishranaID;
+    /**
+     * Tip plana ishrane.
+     */
     private TipPlanaIshrane tip;
+    /**
+     * Datum od kada vazi plan ishrane.
+     */
     private Date datumOd;
+    /**
+     * Datum do kada je aktuelan plan ishrane.
+     */
     private Date datumDo;
+    /**
+     * Clan za koga je plan ishrane namenjen.
+     */
     private Clan clan;
+    /**
+     * Status plana ishrane.
+     */
     private Status status;
-    
+    /**
+     *  Neparametrizovani konstruktor koji pravi nov prazan plan ishrane.
+     */
     public PlanIshrane() {
     }
-
+    /**
+     * Parametrizovani konstruktor koji inicijalizuje plan ishrane i 
+     * postavlja mu prosledjene vrednosti.
+     * 
+     * @param ishranaID   Id plana ishrane kao Long.
+     * @param tip         Tip plana ishrane kao TipPlanaIshrane.
+     * @param datumOd     Datum od kada vazi plan ishrane.
+     * @param datumDo     Datum do kada je aktuelan plan ishrane.
+     * @param clan        Clan za koga je plan ishrane namenjen.
+     */
     public PlanIshrane(long ishranaID, TipPlanaIshrane tip, Date datumOd, Date datumDo, Clan clan) {
         this.ishranaID = ishranaID;
         this.tip = tip;
@@ -31,60 +61,109 @@ public class PlanIshrane implements GenericEntity{
         this.clan = clan;
     }
 
-    
-
+    /**
+     * Vraca id plana ishrane.
+     * 
+     * @return id plana ishrane kao Long.
+     */
     public long getIshranaID() {
         return ishranaID;
     }
-
+    /**
+     * Postavlja id plana ishrane.
+     * 
+     * @param ishranaID Id plana ishrane kao Long.
+     */
     public void setIshranaID(long ishranaID) {
         this.ishranaID = ishranaID;
     }
-
+   /**
+    * Vraca tip plana ishrane.
+    * 
+    * @return Tip plana ishrane kao TipPlanaIshrane.
+    */
     public TipPlanaIshrane getTip() {
         return tip;
     }
-
+    /**
+     * Postavlja tip plana ishrane.
+     * 
+     * @param tip Tip plana ishrane kao TipPlanaIshrane.
+     */
     public void setTip(TipPlanaIshrane tip) {
         this.tip = tip;
     }
-
-    
-
+    /**
+     * Vraca datum od kada vazi plan ishrane.
+     * 
+     * @return Datum od kada vazi plan ishrane kao Date.
+     */
     public Date getDatumOd() {
         return datumOd;
     }
-
+    /**
+     * Postavlja datum od kada vazi plan ishrane.
+     * 
+     * @param datumOd Datum od kada vazi plan ishrane kao Date.
+     */
     public void setDatumOd(Date datumOd) {
         this.datumOd = datumOd;
     }
-
+    /**
+     * Vraca datum do kog traje plan ishrane.
+     * 
+     * @return Datum do kog traje plan ishrane kao Date.
+     */
     public Date getDatumDo() {
         return datumDo;
     }
-
+    /**
+     * Postavlja datum do kog traje plan ishrane.
+     * 
+     * @param datumDo Datum do kog traje plan ishrane kao Date.
+     */
     public void setDatumDo(Date datumDo) {
         this.datumDo = datumDo;
     }
-
+    /**
+     * Vraca clana kome je plan ishrane namenjen.
+     * 
+     * @return Clan kome je namenjen plan ishrane kao Clan.
+     */
     public Clan getClan() {
         return clan;
     }
-
+    /**
+     * Postavlja clana kome je namenjen plan ishrane.
+     * 
+     * @param clan Clan komem je namenjen plan ishrane kao Clan.
+     */
     public void setClan(Clan clan) {
         this.clan = clan;
     }
-
+   /**
+    * Vraca status plana ishrane.
+    * 
+    * @return Status kao Status.
+    */
     public Status getStatus() {
         return status;
     }
-
+    /**
+     * Postavlja status plana ishrane.
+     * 
+     * @param status Status kao Status.
+     */
     public void setStatus(Status status) {
         this.status = status;
     }
 
     
-    
+    /**
+     * Vraca String sa svim podacima o planu ishrane sem statusa.
+     * 
+     * @return Svi podaci o planu ishrane sem statusa kao String.
+     */
     @Override
     public String toString() {
         return "PlanIshrane{" + "ishranaID=" + ishranaID + ", tip=" + tip + ", datumOd=" + datumOd + ", datumDo=" + datumDo + ", clan=" + clan + '}';

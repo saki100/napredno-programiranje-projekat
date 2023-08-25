@@ -5,6 +5,7 @@ import domain.Obrok;
 import operation.AbstractGenericOperation;
 
 /**
+ *Sistemska operacija koja menja podatke o odredjenom Obroku u bazi podataka, odnosno vrsi izmene nekih od atributa objekta klase Obrok.
  *
  * @author Sara
  */

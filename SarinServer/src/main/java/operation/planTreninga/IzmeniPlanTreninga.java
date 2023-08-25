@@ -5,6 +5,8 @@ import domain.PlanTreninga;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja menja podatke o odredjenom Planu treninga u bazi podataka,
+ * odnosno vrsi izmene nekih od atributa objekta klase PlanTreninga.
  *
  * @author Sara
  */

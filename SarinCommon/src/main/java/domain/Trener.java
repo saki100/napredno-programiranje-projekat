@@ -6,20 +6,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Predstavja trenera koji upravlja sportskim klubom odnosno celim sistemom.
+ * 
  * @author Sara
  */
 public class Trener implements GenericEntity{
-    
+    /**
+     * Id trenera.
+     */
     private long id;
+    /**
+     * Ime trenera.
+     */
     private String ime;
+    /**
+     * Prezime trenera.
+     */
     private String prezime;
+    /**
+     * Username trenera koji koristi pri logovanju na sistem.
+     */
     private String username;
+    /**
+     * Password trenera koji koristi pri logovanju na sistem.
+     */
     private String password;
-
+    /**
+     *  Neparametrizovani konstruktor koji pravi novog praznog trenera.
+     */
     public Trener() {
     }
-
+   /**
+    * Parametrizovani konstruktor koji inicijalizuje trenera i 
+    * postavlja mu prosledjene vrednosti.
+    * 
+    * @param id         Id trenera kao Long.
+    * @param ime        Ime trenera kao String.
+    * @param prezime    Prezime trenera kao String.
+    * @param username   Username trenera kao String.
+    * @param password   Password trenera kao String.
+    */
     public Trener(long id, String ime, String prezime, String username, String password) {
         this.id = id;
         this.ime = ime;
@@ -27,51 +53,93 @@ public class Trener implements GenericEntity{
         this.username = username;
         this.password = password;
     }
-
-    
-    
+    /**
+     * Vraca id trenera.
+     * 
+     * @return Id trenera kao Long.
+     */
     public long getId() {
         return id;
     }
-
+   /**
+    * Postavlja id trenera.
+    * 
+    * @param id Id trenera kao Long.
+    */
     public void setId(long id) {
         this.id = id;
     }
-
+    /**
+     * Vraca ime trenera.
+     * 
+     * @return Ime trenera kao String.
+     */
     public String getIme() {
         return ime;
     }
-
+    /**
+     * Postavlja ime trenera.
+     * 
+     * @param ime Ime trenera kao String
+     */
     public void setIme(String ime) {
         this.ime = ime;
     }
-
+    /**
+     * Vraca prezime trenera.
+     * 
+     * @return Prezime trenera kao String.
+     */
     public String getPrezime() {
         return prezime;
     }
-
+    /**
+     * Postavlja prezime trenera.
+     * 
+     * @param prezime Prezime trenera kao String.
+     */
     public void setPrezime(String prezime) {
         this.prezime = prezime;
     }
-
+    /**
+     * Vraca username trenera.
+     * 
+     * @return Username trenera kao String.
+     */
     public String getUsername() {
         return username;
     }
-
+    /**
+     * Postavlja username trenera.
+     * 
+     * @param username Username trenera kao String.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
-
+    /**
+     * Vraca password trenera.
+     * 
+     * @return Password trenera kao String.
+     */
     public String getPassword() {
         return password;
     }
-
+    /**
+     * Postavlja password trenera.
+     * 
+     * @param password Password trenera kao String.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
     
-
+    /**
+     * Vraca String sa svim podacima o treneru.
+     * 
+     * @return Svi podaci o treneru kao String.
+     */
     @Override
 	public String toString() {
 		return "Trener [id=" + id + ", ime=" + ime + ", prezime=" + prezime + ", username=" + username + ", password="

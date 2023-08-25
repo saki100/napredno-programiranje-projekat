@@ -6,6 +6,7 @@ import domain.PlanIshrane;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja dodaje novi Plan ishrane u bazu podataka.
  *
  * @author Sara
  */

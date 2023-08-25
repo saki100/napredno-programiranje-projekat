@@ -4,6 +4,7 @@ package operation.clan;
 import operation.AbstractGenericOperation;
 
 /**
+ * Sistemska operacija koja brise odredjenog clana iz baze podataka.
  *
  * @author Sara
  */
