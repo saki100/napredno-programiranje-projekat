@@ -81,6 +81,8 @@ public class Trening implements GenericEntity{
     /**
      * Postavlja plan treninga.
      * @param planTreninga Plan treninga za odredjenog clana sportskog kluba kao PlanTreninga.
+     * 
+     * @throws NullPointerException ako je unet plan treninga null
      */
     public void setPlanTreninga(PlanTreninga planTreninga) {
     	if(planTreninga==null) throw new NullPointerException();
@@ -98,6 +100,8 @@ public class Trening implements GenericEntity{
      * Postavlja vezbu treninga.
      * 
      * @param vezba Vezba kao Vezba.
+     * 
+     * @throws NullPointerException ako je uneta vezba null
      */
     public void setVezba(Vezba vezba) {
     	if(vezba ==null) throw new NullPointerException();
@@ -163,6 +167,8 @@ public class Trening implements GenericEntity{
     * Postavlja broj ponavljanja vezbe.
     * 
     * @param brPonavljanja Broj ponavljanja vezbe kao int.
+    * 
+    * @throws IllegalArgumentException ako je unet broj ponavljanja vezbe veci od dvadeset
     */
     public void setBrPonavljanja(int brPonavljanja) {
     	if(brPonavljanja>20) throw new IllegalArgumentException("Broj ponavljanja ne moze biti veci 20.");

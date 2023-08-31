@@ -83,6 +83,9 @@ public class Trener implements GenericEntity{
      * Postavlja ime trenera.
      * 
      * @param ime Ime trenera kao String
+     * 
+     * @throws NullPointerException ako je uneto ime null 
+	 * @throws IllegalArgumentException ako je uneto ime krace od tri slova ili ako je prazan string
      */
     public void setIme(String ime) {
     	if(ime==null) throw new NullPointerException();
@@ -101,6 +104,9 @@ public class Trener implements GenericEntity{
      * Postavlja prezime trenera.
      * 
      * @param prezime Prezime trenera kao String.
+     * 
+     * @throws NullPointerException ako je uneto prezime null 
+	 * @throws IllegalArgumentException ako je uneto prezime krace od tri slova ili ako je prazan string
      */
     public void setPrezime(String prezime) {
     	if(prezime==null) throw new NullPointerException();
@@ -119,6 +125,9 @@ public class Trener implements GenericEntity{
      * Postavlja username trenera.
      * 
      * @param username Username trenera kao String.
+     * 
+     * @throws NullPointerException ako je unet username null 
+	 * @throws IllegalArgumentException ako je unet username krace od cetiri karaktera
      */
     public void setUsername(String username) {
     	if(username==null) throw new NullPointerException();
@@ -137,6 +146,9 @@ public class Trener implements GenericEntity{
      * Postavlja password trenera.
      * 
      * @param password Password trenera kao String.
+     * 
+     * @throws NullPointerException ako je unet password null 
+	 * @throws IllegalArgumentException ako je unet password kraci od cetiri karaktera
      */
     public void setPassword(String password) {
     	if(password==null) throw new NullPointerException();

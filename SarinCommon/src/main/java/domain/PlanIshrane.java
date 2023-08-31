@@ -107,6 +107,8 @@ public class PlanIshrane implements GenericEntity{
      * Postavlja datum od kada vazi plan ishrane.
      * 
      * @param datumOd Datum od kada vazi plan ishrane kao Date.
+     * 
+     * @throws NullPointerException ako je unet datum od koga vazi plan ishrane null
      */
     public void setDatumOd(Date datumOd) {
     	//if(datumOd.after(datumDo)) throw new IllegalArgumentException("Datum od mora biti pre datuma do.");
@@ -125,6 +127,8 @@ public class PlanIshrane implements GenericEntity{
      * Postavlja datum do kog traje plan ishrane.
      * 
      * @param datumDo Datum do kog traje plan ishrane kao Date.
+     * 
+     * @throws NullPointerException ako je unet datum do koga vazi plan ishrane null
      */
     public void setDatumDo(Date datumDo) {
     	//if(datumDo.before(datumOd)) throw new IllegalArgumentException("Datum do mora biti posle datuma od.");
@@ -144,6 +148,8 @@ public class PlanIshrane implements GenericEntity{
      * Postavlja clana kome je namenjen plan ishrane.
      * 
      * @param clan Clan komem je namenjen plan ishrane kao Clan.
+     * 
+     * @throws NullPointerException ako je unet clan null
      */
     public void setClan(Clan clan) {
     	if(clan==null) throw new NullPointerException();

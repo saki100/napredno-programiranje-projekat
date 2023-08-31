@@ -108,6 +108,8 @@ public class PlanTreninga implements GenericEntity{
      * Postavlja datum od kada vazi plan treninga.
      * 
      * @param datumOd Datum od kada vazi plan treninga kao Date.
+     * 
+     * @throws NullPointerException ako je unet datum od koga vazi plan treninga null
      */
     public void setDatumOD(Date datumOD) {
     	if(datumOD==null) throw new NullPointerException();
@@ -125,6 +127,8 @@ public class PlanTreninga implements GenericEntity{
      * Postavlja datum do kog traje plan treninga.
      * 
      * @param datumDo Datum do kog traje plan treninga kao Date.
+     * 
+     * @throws NullPointerException ako je unet datum do koga vazi plan ishrane null
      */
     public void setDatumDO(Date datumDO) {
     	if(datumDO==null) throw new NullPointerException();
@@ -142,6 +146,8 @@ public class PlanTreninga implements GenericEntity{
      * Postavlja clana kome je namenjen plan treninga.
      * 
      * @param clan Clan komem je namenjen plan treninga kao Clan.
+     * 
+     * @throws NullPointerException ako je unet clan null
      */
     public void setClan(Clan clan) {
     	if(clan==null) throw new NullPointerException();

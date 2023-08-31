@@ -67,6 +67,8 @@ public class Ishrana implements GenericEntity {
     /**
      * Postavlja plan ishrane.
      * @param planIshrane Plan ishrane za odredjenog clana sportskog kluba kao PlanIshrane.
+     * 
+     * @throws NullPointerException ako je unet plan ishrane null
      */
     public void setPlanIshrane(PlanIshrane planIshrane) {
     	if(planIshrane==null) throw new NullPointerException();
@@ -84,6 +86,8 @@ public class Ishrana implements GenericEntity {
      * Postavlja obrok na odedjenu vrednost.
      * 
      * @param obrok Obrok koji ce se konzumirati kao Obrok.
+     * 
+     * @throws NullPointerException ako je unet obrok null
      */
     public void setObrok(Obrok obrok) {
     	if(obrok==null) throw new NullPointerException();

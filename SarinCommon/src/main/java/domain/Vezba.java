@@ -69,6 +69,8 @@ public class Vezba implements GenericEntity{
      * Postavlja naziv vezbe.
      * 
      * @param naziv Naziv vezbe kao String.
+     * 
+     * @throws NullPointerException ako je unet naziv null
      */
     public void setNaziv(String naziv) {
     	if(naziv==null) throw new NullPointerException();

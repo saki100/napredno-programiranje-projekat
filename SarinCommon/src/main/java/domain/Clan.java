@@ -108,6 +108,9 @@ public class Clan implements GenericEntity{
      * Postavlja ime clana.
      * 
      * @param ime Ime clana kao String
+     * 
+     * @throws NullPointerException ako je uneto ime null 
+	 * @throws IllegalArgumentException ako je uneto ime krace od tri slova ili ako je prazan string
      */
     public void setIme(String ime) {
     	if(ime==null) throw new NullPointerException();
@@ -126,6 +129,9 @@ public class Clan implements GenericEntity{
     * Postavlja prezime clana.
     * 
     * @param prezime Prezime clana kao String.
+    * 
+    *  @throws NullPointerException ako je uneto prezime null 
+	 * @throws IllegalArgumentException ako je uneto prezime krace od tri slova ili ako je prazan string
     */
     public void setPrezime(String prezime) {
     	if(prezime==null) throw new NullPointerException();
@@ -141,9 +147,11 @@ public class Clan implements GenericEntity{
         return email;
     }
     /**
-     * Postavlja email clana.
+     * Postavlja email clana. Ako email ne sadrzi znak @ postavlja email na null.
      * 
      * @param email Email clana kao String.
+     * 
+     * @throws NullPointerException ako je unet email null
      */
     public void setEmail(String email) {
     	if(email==null) throw new NullPointerException();
@@ -163,6 +171,9 @@ public class Clan implements GenericEntity{
     * Postavlja datum rodjenja clana.
     * 
     * @param datumRodjenja Datum rodjenja clana kao String.
+    * 
+    * @throws NullPointerException ako je unet datum rodjenja null
+    * @throws IllegalArgumentException ako je unet datum rodjenja nakon trenutnog datuma
     */
     public void setDatumRodjenja(Date datumRodjenja) {
     	if(datumRodjenja==null) throw new NullPointerException();
@@ -182,6 +193,8 @@ public class Clan implements GenericEntity{
      * Postavlja abroj telefona clana.
      * 
      * @param brojTelefona Broj telefona clana kao String.
+     * 
+     * @throws NullPointerException ako je unet broj telefona null
      */
     public void setBrojTelefona(String brojTelefona) {
     	if(brojTelefona==null) throw new NullPointerException();

@@ -57,6 +57,8 @@ public class Obrok implements GenericEntity{
      * Postavlja kalorije obroka.
      * 
      * @param kalorije Kalorije kao int.
+     * 
+     * @throws IllegalArgumentException ako je unet broj kalorija manji od 100
      */
     public void setKalorije(int kalorije) {
     	if(kalorije<100) throw new IllegalArgumentException("Broj kalorija mora biti veci od 100");
@@ -90,6 +92,9 @@ public class Obrok implements GenericEntity{
      * Postavlja naziv obroka.
      * 
      * @param naziv Naziv obroka kao String.
+     * 
+     * @throws NullPointerException ako je unet naziv obroka null
+	 * @throws IllegalArgumentException ako je unet naziv obroka kraci od 4 slova
      */
     public void setNaziv(String naziv) {
     	if(naziv==null) throw new NullPointerException();
