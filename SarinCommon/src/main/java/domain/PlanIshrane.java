@@ -54,11 +54,13 @@ public class PlanIshrane implements GenericEntity{
      * @param clan        Clan za koga je plan ishrane namenjen.
      */
     public PlanIshrane(long ishranaID, TipPlanaIshrane tip, Date datumOd, Date datumDo, Clan clan) {
-        this.ishranaID = ishranaID;
+        /*this.ishranaID = ishranaID;
         this.tip = tip;
         this.datumOd = datumOd;
         this.datumDo = datumDo;
-        this.clan = clan;
+        this.clan = clan;*/
+    	
+    	setIshranaID(ishranaID); setTip(tip); setDatumOd(datumOd); setDatumDo(datumDo); setClan(clan);
     }
 
     /**
@@ -107,7 +109,9 @@ public class PlanIshrane implements GenericEntity{
      * @param datumOd Datum od kada vazi plan ishrane kao Date.
      */
     public void setDatumOd(Date datumOd) {
-        this.datumOd = datumOd;
+    	//if(datumOd.after(datumDo)) throw new IllegalArgumentException("Datum od mora biti pre datuma do.");
+    	if(datumOd==null) throw new NullPointerException();
+    	else this.datumOd = datumOd;
     }
     /**
      * Vraca datum do kog traje plan ishrane.
@@ -123,6 +127,9 @@ public class PlanIshrane implements GenericEntity{
      * @param datumDo Datum do kog traje plan ishrane kao Date.
      */
     public void setDatumDo(Date datumDo) {
+    	//if(datumDo.before(datumOd)) throw new IllegalArgumentException("Datum do mora biti posle datuma od.");
+    	if(datumDo==null) throw new NullPointerException();
+
         this.datumDo = datumDo;
     }
     /**
@@ -139,6 +146,7 @@ public class PlanIshrane implements GenericEntity{
      * @param clan Clan komem je namenjen plan ishrane kao Clan.
      */
     public void setClan(Clan clan) {
+    	if(clan==null) throw new NullPointerException();
         this.clan = clan;
     }
    /**

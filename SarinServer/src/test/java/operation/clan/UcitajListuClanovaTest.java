@@ -20,7 +20,7 @@ import domain.Clan;
 import domain.GenericEntity;
 import form.DBConfigModel;
 
-class UcitajListuClanovaTest {
+public class UcitajListuClanovaTest {
 
 	private static UcitajListuClanova ucitajListuClanova;
 
@@ -58,6 +58,7 @@ class UcitajListuClanovaTest {
 
 	@Test
 	void testExecute() throws Exception {
+		//Clan clan=new Clan(); clan.setEmail("sara@gmail.com");
 		ucitajListuClanova.execute(new Clan());
 		List<Clan> lista = ucitajListuClanova.getClanove();
 		assertNotNull(lista);

@@ -33,7 +33,7 @@ import form.DBConfigModel;
 import operation.trener.UcitajTrenere;
 import repository.db.impl.RepositoryDBGeneric;
 
-class PretraziPlanoveIshraneTest {
+public class PretraziPlanoveIshraneTest {
 
 	private static PretraziPlanoveIshrane pretraziPlanoveIshrane;
 

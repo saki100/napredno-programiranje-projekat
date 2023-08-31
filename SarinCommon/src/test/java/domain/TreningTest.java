@@ -11,18 +11,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class TreningTest {
+public class TreningTest {
 
 	private ResultSet rs;
     private Trening trening;
 	
 	@BeforeEach
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		trening=new Trening();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		trening=null;
 	}
 
@@ -42,39 +42,51 @@ class TreningTest {
 	}
 
 	@Test
-	public void testGetPlanTreninga() {
+	public void testSetPlanTreningaOK() {
 		PlanTreninga planTr=new PlanTreninga();
 		trening.setPlanTreninga(planTr);
         assertEquals(planTr, trening.getPlanTreninga());
 	}
 	@Test
-	public void testGetVezba() {
+	public void setPlanTreningaNull() {
+		assertThrows(java.lang.NullPointerException.class, () -> trening.setPlanTreninga(null));
+	}
+	@Test
+	public void testSetVezbaOK() {
 		Vezba vezba=new Vezba();
 		trening.setVezba(vezba);
         assertEquals(vezba, trening.getVezba());
 	}
 	@Test
-	public void testGetDan() {
+	public void setVezbaNull() {
+		assertThrows(java.lang.NullPointerException.class, () -> trening.setVezba(null));
+	}
+	@Test
+	public void testSetDan() {
 		trening.setDan(Dan.SREDA);
         assertEquals(Dan.SREDA, trening.getDan());
 	}
 	@Test
-	public void testGetRbVezbe() {
+	public void testSetRbVezbe() {
 		trening.setRbVezbe(3);
         assertEquals(3, trening.getRbVezbe());
 	}
 	@Test
-	public void testGetBrSerija() {
+	public void testSetBrSerija() {
 		trening.setBrSerija(4);
         assertEquals(4, trening.getBrSerija());
 	}
 	@Test
-	public void testGetBrPonavljanja() {
+	public void testSetBrPonavljanjaOK() {
 		trening.setBrPonavljanja(12);
         assertEquals(12, trening.getBrPonavljanja());
 	}
 	@Test
-	public void testGetStatus() {
+	public void testSetBrPonavljanjaVeciOdDvadeset() {
+		assertThrows(java.lang.IllegalArgumentException.class, () -> trening.setBrPonavljanja(25));
+	}
+	@Test
+	public void testSetStatus() {
 		trening.setStatus(Status.INSERT);
 		assertEquals(Status.INSERT, trening.getStatus());
 	}

@@ -36,7 +36,7 @@ import operation.clan.IzmeniClana;
 import operation.clan.PretraziClana;
 import repository.db.impl.RepositoryDBGeneric;
 
-class IzmeniPlanIshraneTest {
+public class IzmeniPlanIshraneTest {
 
 	private static IzmeniPlanIshrane izmeniPlanIshrane;
 	private PlanIshrane planIshrane;

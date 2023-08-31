@@ -26,7 +26,7 @@ import domain.VremeObroka;
 import form.DBConfigModel;
 import repository.db.DbConnectionFactory;
 
-class IzmeniIshranuTest {
+public class IzmeniIshranuTest {
 	
 	private static IzmeniIshranu izmeniIshranu;
 	private Ishrana ishrana;

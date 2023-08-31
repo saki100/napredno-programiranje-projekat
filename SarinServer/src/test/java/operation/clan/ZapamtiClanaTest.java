@@ -26,7 +26,7 @@ import domain.Grad;
 import form.DBConfigModel;
 import repository.db.DbConnectionFactory;
 
-class ZapamtiClanaTest {
+public class ZapamtiClanaTest {
 
 	private static ZapamtiClana zapamtiClana;
 	private static Clan clan;

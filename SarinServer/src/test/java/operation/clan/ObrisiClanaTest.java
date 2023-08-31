@@ -25,7 +25,7 @@ import domain.Obrok;
 import form.DBConfigModel;
 import repository.db.DbConnectionFactory;
 
-class ObrisiClanaTest {
+public class ObrisiClanaTest {
 
 	private static ObrisiClana obrisiClana;
 	private Clan clan;

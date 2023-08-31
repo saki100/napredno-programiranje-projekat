@@ -6,6 +6,8 @@ import static org.mockito.Mockito.when;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -17,19 +19,20 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-class ClanTest {
+  public class ClanTest {
 
 	private ResultSet rs;
 	
+	//private Clan clan=new Clan();
 	private Clan clan;
 	
 	@BeforeEach
-	void setUp() {
+	public void setUp() {
 		clan = new Clan();
 	}
 	
 	@AfterEach
-	void tearDown() {
+	public void tearDown() {
 		clan = null;
 	}
 	
@@ -56,36 +59,83 @@ class ClanTest {
 	}
 	
 	@Test
-	public void testGetIme() {
+	public void testSetImeOK() {
 		clan.setIme("Mika");
 		assertEquals("Mika", clan.getIme());
 	}
-	
 	@Test
-	public void testGetPrezime() {
+	public void testSetImeNeispravno() {
+		assertThrows(java.lang.IllegalArgumentException.class, () -> clan.setIme("Im"));
+		assertThrows(java.lang.IllegalArgumentException.class, () -> clan.setIme(""));
+	}
+	@Test
+	public void testSetImeNUll() {
+		assertThrows(java.lang.NullPointerException.class, () -> clan.setIme(null));
+	}
+	@Test
+	public void testSetPrezime() {
 		clan.setPrezime("Mikic");
 		assertEquals("Mikic", clan.getPrezime());
 	}
+	@Test
+	public void testSetPrezimeNeispravno() {
+		assertThrows(java.lang.IllegalArgumentException.class, () -> clan.setPrezime("Pr"));
+		assertThrows(java.lang.IllegalArgumentException.class, () -> clan.setPrezime(""));
+	}
+	@Test
+	public void testSetPrezimeNUll() {
+		assertThrows(java.lang.NullPointerException.class, () -> clan.setPrezime(null));
+	}
 	
 	@Test
-	public void testGetEmail() {
+	public void testSetEmailOK() {
 		clan.setEmail("mika@gmail.com");
 		assertEquals("mika@gmail.com", clan.getEmail());
 	}
-	
 	@Test
-	public void testGetDatumRodjenja() {
+	public void testSetEmailNeispravan() {
+		//assertThrows(java.lang.IllegalArgumentException.class, () -> clan.setEmail("sara.spanovic"));
+		clan.setEmail("mika.gmail.com");
+		assertEquals(null, clan.getEmail());
+	}
+	@Test
+	public void testSetEmailNUll() {
+		assertThrows(java.lang.NullPointerException.class, () -> clan.setEmail(null));
+	}
+	/*@Test
+	public void testSetDatumRodjenja() {
 		Date datum= new Date();
 		clan.setDatumRodjenja(datum);
 		assertEquals(datum, clan.getDatumRodjenja());
+	}*/
+	@Test 
+	public void testSetDatumRodjenjaIspravan() {
+		clan.setDatumRodjenja(new Date());
+		assertEquals(new Date(), clan.getDatumRodjenja());
 	}
-	
+	@Test 
+	public void testSetDatumRodjenjaNemoguc() {
+		Date d = Date.from(LocalDate.of(3000, 8, 8).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+		assertThrows(java.lang.IllegalArgumentException.class, () -> clan.setDatumRodjenja(d));
+	}
+	@Test 
+	public void testSetDatumRodjenjaNull() {
+		assertThrows(java.lang.NullPointerException.class, () -> clan.setDatumRodjenja(null));
+	}
 	@Test
-	public void testGetBrojTelefona() {
+	public void testSetBrojTelefonaOK() {
 		clan.setBrojTelefona("+38164123456");
 		assertEquals("+38164123456", clan.getBrojTelefona());
 	}
-	
+	@Test 
+	public void testSetBrojTelefonaNull() {
+		assertThrows(java.lang.NullPointerException.class, () -> clan.setBrojTelefona(null));
+	}
+	/*@Test
+	public void testSetBrojTelefonaNeispravan() {
+		assertThrows(java.lang.IllegalArgumentException.class, ()->clan.setBrojTelefona("38164123456"));
+		
+	}*/
 	@Test
 	public void testToString() {
 		clan.setIme("Pera");

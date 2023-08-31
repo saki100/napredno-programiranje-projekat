@@ -1,7 +1,6 @@
 
 package domain;
 
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,13 +67,17 @@ public class Clan implements GenericEntity{
      * @param grad           Grad u kome clan zivi tipa Grad.
      */
     public Clan(long rbClana, String ime, String prezime, String email, Date datumRodjenja, String brojTelefona, Grad grad) {
-        this.rbClana = rbClana;
+        /*this.rbClana = rbClana;
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
         this.datumRodjenja = datumRodjenja;
         this.brojTelefona = brojTelefona;
-        this.grad = grad;
+        this.grad = grad;*/
+    	
+    	setRbClana(rbClana);  setEmail(email);       setGrad(grad);
+    	setIme(ime);          setDatumRodjenja(datumRodjenja);
+    	setPrezime(prezime);   setBrojTelefona(brojTelefona);
     }
 
     /**
@@ -107,6 +110,8 @@ public class Clan implements GenericEntity{
      * @param ime Ime clana kao String
      */
     public void setIme(String ime) {
+    	if(ime==null) throw new NullPointerException();
+    	if(ime.length()<3 || ime.equals("")) throw new IllegalArgumentException();
         this.ime = ime;
     }
     /**
@@ -123,6 +128,8 @@ public class Clan implements GenericEntity{
     * @param prezime Prezime clana kao String.
     */
     public void setPrezime(String prezime) {
+    	if(prezime==null) throw new NullPointerException();
+    	if(prezime.length()<3 || prezime.equals("")) throw new IllegalArgumentException();
         this.prezime = prezime;
     }
     /**
@@ -139,7 +146,10 @@ public class Clan implements GenericEntity{
      * @param email Email clana kao String.
      */
     public void setEmail(String email) {
-        this.email = email;
+    	if(email==null) throw new NullPointerException();
+    	if(!email.contains("@")) this.email=null;
+    	
+    	else this.email = email;
     }
     /**
      * Vraca datum rodjenja clana kao Date.
@@ -155,7 +165,10 @@ public class Clan implements GenericEntity{
     * @param datumRodjenja Datum rodjenja clana kao String.
     */
     public void setDatumRodjenja(Date datumRodjenja) {
-        this.datumRodjenja = datumRodjenja;
+    	if(datumRodjenja==null) throw new NullPointerException();
+    	if(datumRodjenja.after(new Date())) throw new IllegalArgumentException("Nemoguc datum rodjenja.");
+        
+    	this.datumRodjenja = datumRodjenja;
     }
     /**
      * Vraca broj telefona clana.
@@ -171,6 +184,11 @@ public class Clan implements GenericEntity{
      * @param brojTelefona Broj telefona clana kao String.
      */
     public void setBrojTelefona(String brojTelefona) {
+    	if(brojTelefona==null) throw new NullPointerException();
+    	//Sledeca linija koda je zakomentarisana jer pravi problem u testovima za sistemske operacije
+    	// posto prvobitno nije zamisljeno tako, medjutim ostavila sam cisto zbog logike da vidite kako bih odradila
+    	//ostavicu zakomentarisan i odgovarajuci test
+    	//if(!brojTelefona.contains("+381")) throw new IllegalArgumentException("Broj telefona mora poceti sa '+381'");
         this.brojTelefona = brojTelefona;
     } 
     /**

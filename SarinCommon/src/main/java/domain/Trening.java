@@ -61,12 +61,14 @@ public class Trening implements GenericEntity{
      * @param brPonavljanja Broj ponavljanja kao int.
      */
     public Trening(PlanTreninga planTreninga, Vezba vezba, Dan dan, int rbVezbe, int brSerija, int brPonavljanja) {
-        this.planTreninga = planTreninga;
+        /*this.planTreninga = planTreninga;
         this.vezba = vezba;
         this.dan = dan;
         this.rbVezbe = rbVezbe;
         this.brSerija = brSerija;
-        this.brPonavljanja = brPonavljanja;
+        this.brPonavljanja = brPonavljanja;*/
+    	
+    	setPlanTreninga(planTreninga);setVezba(vezba);setDan(dan);setRbVezbe(rbVezbe);setBrSerija(brSerija);setBrPonavljanja(brPonavljanja);
     }
     /**
      * Vraca plan treninga.
@@ -81,6 +83,7 @@ public class Trening implements GenericEntity{
      * @param planTreninga Plan treninga za odredjenog clana sportskog kluba kao PlanTreninga.
      */
     public void setPlanTreninga(PlanTreninga planTreninga) {
+    	if(planTreninga==null) throw new NullPointerException();
         this.planTreninga = planTreninga;
     }
    /**
@@ -97,7 +100,8 @@ public class Trening implements GenericEntity{
      * @param vezba Vezba kao Vezba.
      */
     public void setVezba(Vezba vezba) {
-        this.vezba = vezba;
+    	if(vezba ==null) throw new NullPointerException();
+    	 this.vezba = vezba;
     }
     /**
      * Vraca dan u nedelji kada ce se vezba izvoditi.
@@ -161,6 +165,7 @@ public class Trening implements GenericEntity{
     * @param brPonavljanja Broj ponavljanja vezbe kao int.
     */
     public void setBrPonavljanja(int brPonavljanja) {
+    	if(brPonavljanja>20) throw new IllegalArgumentException("Broj ponavljanja ne moze biti veci 20.");
         this.brPonavljanja = brPonavljanja;
     }
     /**

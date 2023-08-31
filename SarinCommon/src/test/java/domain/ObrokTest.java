@@ -19,24 +19,24 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mockito;
 
 
-class ObrokTest {
+ public class ObrokTest {
 
 	private ResultSet rs;
 	private Obrok obrok;
 	
 
 	@BeforeEach
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		obrok=new Obrok();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		obrok=null;
 	}
 
 	@Test
-	void testKonstruktor() {
+	public void testKonstruktor() {
 		obrok=new Obrok(5, "Palenta", 380);
 		
 		assertEquals(5L, obrok.getObrokID());
@@ -44,22 +44,33 @@ class ObrokTest {
 		assertEquals(380, obrok.getKalorije());
 	}
     @Test
-    public void testGetKallorije() {
+    public void testSetKallorijeOK() {
     	obrok.setKalorije(380);
 		assertEquals(380, obrok.getKalorije());
     }
+    @Test
+    public void testSetKallorijeManjeOdSto() {
+		assertThrows(java.lang.IllegalArgumentException.class, () -> obrok.setKalorije(80));
+    }
 	@Test 
-	public void testGetObrokID() {
+	public void testSetObrokID() {
 		obrok.setObrokID(5L);
 		assertEquals(5L, obrok.getObrokID());
 	}
 	@Test 
-	public void testGetNaziv() {
+	public void testSetNazivOK() {
 		obrok.setNaziv("Palenta");
 		assertEquals("Palenta", obrok.getNaziv());
 	}
 	@Test
-	public void testGetToString() {
+	public void testSetNazivNull() {
+		assertThrows(java.lang.NullPointerException.class, () -> obrok.setNaziv(null));
+	} 
+	public void testSetNazivNeispravno() {
+		assertThrows(java.lang.IllegalArgumentException.class, () -> obrok.setNaziv("Los"));
+	}
+	@Test
+	public void testToString() {
 		obrok.setNaziv("Palenta");
         assertEquals("Palenta", obrok.toString());
 	}
@@ -71,6 +82,7 @@ class ObrokTest {
 	public void testGetColumnNamesForInsert() {
 		assertEquals("naziv,kalorije", obrok.getColumnNamesForInsert());
 	}
+	
 	@ParameterizedTest
 	@CsvSource ({
 		"Supica, Supica, true",
@@ -84,6 +96,7 @@ class ObrokTest {
 		
 		assertEquals(equals, obrok.equals(obrok2));
 	}
+	
 	@Test
 	public void testGetInsertValues() {
 		obrok=new Obrok(); obrok.setNaziv("Palenta"); obrok.setKalorije(380);

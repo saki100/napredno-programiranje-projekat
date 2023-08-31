@@ -39,7 +39,7 @@ import operation.trener.UcitajTrenere;
 import repository.db.DbConnectionFactory;
 import repository.db.impl.RepositoryDBGeneric;
 
-class DodajPlanIshraneTest {
+public class DodajPlanIshraneTest {
 
 	private static DodajPlanIshrane dodajPlanIshrane;
 	private PlanIshrane planIshrane;

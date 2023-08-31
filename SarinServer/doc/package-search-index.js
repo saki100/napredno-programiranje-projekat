@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"operation"},{"l":"operation.clan"},{"l":"operation.ishrana"},{"l":"operation.obrok"},{"l":"operation.planIshrane"},{"l":"operation.planTreninga"},{"l":"operation.trener"}];updateSearchResults();

@@ -16,19 +16,18 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-class PlanTreningaTest {
+public class PlanTreningaTest {
 
 	private ResultSet rs;
 	private PlanTreninga planTreninga;
 
 	@BeforeEach
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		planTreninga=new PlanTreninga();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		planTreninga=null;
 	}
 
@@ -48,29 +47,35 @@ class PlanTreningaTest {
 	    assertEquals(clan, planTreninga.getClan());
 	}
 	@Test
-	public void testGetTreningID(){
+	public void testSetTreningID(){
 	planTreninga.setTreningID(10L);;
     assertEquals(10L, planTreninga.getTreningID());
 	}
 	@Test
-	public void testGetTip() {
+	public void testSetTip() {
 		planTreninga.setTip(TipPlanaTreninga.KARDIO);
         assertEquals(TipPlanaTreninga.KARDIO, planTreninga.getTip());
 	}
 	
 	@Test
-	public void testGetDatumOd(){
+	public void testSetDatumOdOK(){
 		Date datumOd= Date.from(LocalDate.of(2023, 6, 1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         planTreninga.setDatumOD(datumOd);
         assertEquals(datumOd, planTreninga.getDatumOD());
 	}
 	@Test
-	public void testGetDatumDo() {
+	public void testSetDatumOdNull(){
+		assertThrows(java.lang.NullPointerException.class, () -> planTreninga.setDatumOD(null));
+	}
+	@Test
+	public void testSetDatumDoOK() {
 		Date datumDo= Date.from(LocalDate.of(2023, 7, 1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         planTreninga.setDatumDO(datumDo);
         assertEquals(datumDo, planTreninga.getDatumDO());
-
-
+	}
+	@Test
+	public void testSetDatumDoNull(){
+		assertThrows(java.lang.NullPointerException.class, () -> planTreninga.setDatumDO(null));
 	}
 	@Test
 	public void testGetClan() {
@@ -79,6 +84,10 @@ class PlanTreningaTest {
 		Clan clan = new Clan(123L, "Pera", "Peric", "pera@gmail.com", datumRodjenja, "+3811234567", grad);
        planTreninga.setClan(clan);
        assertEquals(clan, planTreninga.getClan());
+	}
+	@Test
+	public void testSetClanNull(){
+		assertThrows(java.lang.NullPointerException.class, () -> planTreninga.setClan(null));
 	}
 	@Test
 	public void testGetStatus() {

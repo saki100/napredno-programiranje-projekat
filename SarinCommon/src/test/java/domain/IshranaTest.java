@@ -16,18 +16,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class IshranaTest {
+public class IshranaTest {
 
 	private ResultSet rs;
 	private Ishrana ishrana;
 	
 	@BeforeEach
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		ishrana=new Ishrana();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		ishrana=null;
 	}
 
@@ -74,33 +74,39 @@ class IshranaTest {
 	}
    
 	@Test
-	public void getPlanIshrane() {
+	public void setPlanIshraneOK() {
 		PlanIshrane planIsh=new PlanIshrane();
 		ishrana.setPlanIshrane(planIsh);
 		assertEquals(planIsh, ishrana.getPlanIshrane());
 	}
-	
 	@Test
-	public void testGetObrok() {
+	public void setPlanIshraneNull() {
+		assertThrows(java.lang.NullPointerException.class, () -> ishrana.setPlanIshrane(null));
+	}
+	@Test
+	public void testSetObrokOK() {
 		 Obrok obrok=new Obrok(123, "Tortilja sa piletinom",550);
 	        ishrana.setObrok(obrok);
 	        assertEquals(obrok, ishrana.getObrok());
 	}
-	
+	@Test
+	public void setObrokNull() {
+		assertThrows(java.lang.NullPointerException.class, () -> ishrana.setObrok(null));
+	}
 	@Test 
-	public void testGetVreme() {
+	public void testSetVreme() {
 		ishrana.setVreme(VremeObroka.VECERA);
 		 assertEquals(VremeObroka.VECERA, ishrana.getVreme());
 	}
 	
 	@Test
-	public void testGetDan() {
+	public void testSetDan() {
 		ishrana.setDan(Dan.SREDA);
 		 assertEquals(Dan.SREDA, ishrana.getDan());
 	}
 	
 	@Test
-	public void testGetStatus() {
+	public void testSetStatus() {
 		ishrana.setStatus(Status.INSERT);
 		assertEquals(Status.INSERT, ishrana.getStatus());	
 	}

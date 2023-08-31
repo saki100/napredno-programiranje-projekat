@@ -47,11 +47,13 @@ public class Trener implements GenericEntity{
     * @param password   Password trenera kao String.
     */
     public Trener(long id, String ime, String prezime, String username, String password) {
-        this.id = id;
+       /* this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.username = username;
-        this.password = password;
+        this.password = password;*/
+    	
+    	setId(id);setIme(ime);setPrezime(prezime);setUsername(username);setPassword(password);
     }
     /**
      * Vraca id trenera.
@@ -83,6 +85,8 @@ public class Trener implements GenericEntity{
      * @param ime Ime trenera kao String
      */
     public void setIme(String ime) {
+    	if(ime==null) throw new NullPointerException();
+    	if(ime.length()<3 || ime.equals("")) throw new IllegalArgumentException();
         this.ime = ime;
     }
     /**
@@ -99,6 +103,8 @@ public class Trener implements GenericEntity{
      * @param prezime Prezime trenera kao String.
      */
     public void setPrezime(String prezime) {
+    	if(prezime==null) throw new NullPointerException();
+    	if(prezime.length()<3 || prezime.equals("")) throw new IllegalArgumentException();
         this.prezime = prezime;
     }
     /**
@@ -115,6 +121,8 @@ public class Trener implements GenericEntity{
      * @param username Username trenera kao String.
      */
     public void setUsername(String username) {
+    	if(username==null) throw new NullPointerException();
+        if(username.length()<4) throw new IllegalArgumentException("Username  mora biti duzi od 3.");
         this.username = username;
     }
     /**
@@ -131,6 +139,8 @@ public class Trener implements GenericEntity{
      * @param password Password trenera kao String.
      */
     public void setPassword(String password) {
+    	if(password==null) throw new NullPointerException();
+        if(password.length()<4) throw new IllegalArgumentException("Password  mora biti duzi od 3.");
         this.password = password;
     }
 

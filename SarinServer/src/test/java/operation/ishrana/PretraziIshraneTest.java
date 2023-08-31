@@ -18,11 +18,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import domain.Dan;
 import domain.Ishrana;
+import domain.Obrok;
 import domain.PlanIshrane;
 import domain.VremeObroka;
 import form.DBConfigModel;
 
-class PretraziIshraneTest {
+public class PretraziIshraneTest {
 	
 	private static PretraziIshrane pretraziIshrane;
 	private Ishrana ishrana;
@@ -76,7 +77,7 @@ class PretraziIshraneTest {
 		PlanIshrane planIsh = new PlanIshrane();
 		planIsh.setIshranaID(9L);
 		
-		ishrana = new Ishrana(planIsh, null, VremeObroka.VECERA, Dan.SREDA);
+		ishrana = new Ishrana(planIsh, new Obrok(), VremeObroka.VECERA, Dan.SREDA);
 		
 		pretraziIshrane.execute(ishrana);
 		

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import operation.clan.IzmeniClana;
 import operation.clan.ObrisiClana;
 import operation.clan.PretraziClana;

@@ -33,8 +33,10 @@ public class Grad implements GenericEntity{
 	 * @param nazivGrada  Naziv grada kao String.
 	 */
 	public Grad(long gradID, String nazivGrada) {
-		this.gradID = gradID;
-		this.nazivGrada = nazivGrada;
+		/*this.gradID = gradID;
+		this.nazivGrada = nazivGrada;*/
+		setGradID(gradID);
+		setNazivGrada(nazivGrada);
 	}
 
 	/**

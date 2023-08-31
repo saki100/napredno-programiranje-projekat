@@ -36,8 +36,10 @@ public class Vezba implements GenericEntity{
     * @param naziv     Naziv vezbe kao String.
     */
     public Vezba(long vezbaID, String naziv) {
-        this.vezbaID = vezbaID;
-        this.naziv = naziv;
+        /*this.vezbaID = vezbaID;
+        this.naziv = naziv;*/
+    	
+    	setVezbaID(vezbaID);   setNaziv(naziv);
     }
     /**
      * Vraca id vezbe.
@@ -69,6 +71,7 @@ public class Vezba implements GenericEntity{
      * @param naziv Naziv vezbe kao String.
      */
     public void setNaziv(String naziv) {
+    	if(naziv==null) throw new NullPointerException();
         this.naziv = naziv;
     }
     /**

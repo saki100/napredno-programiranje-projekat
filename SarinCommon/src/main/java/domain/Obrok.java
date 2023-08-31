@@ -39,9 +39,11 @@ public class Obrok implements GenericEntity{
     * @param kalorije   Kalorije koje obrok sadrzi kao int.
     */
     public Obrok(long obrokID, String naziv, int kalorije) {
-        this.obrokID = obrokID;
+        /*this.obrokID = obrokID;
         this.naziv = naziv;
-        this.kalorije = kalorije;
+        this.kalorije = kalorije;*/
+    	
+    	setObrokID(obrokID); setNaziv(naziv); setKalorije(kalorije);
     }
    /**
     * Vraca kalorije koje obrok sadrzi.
@@ -57,7 +59,8 @@ public class Obrok implements GenericEntity{
      * @param kalorije Kalorije kao int.
      */
     public void setKalorije(int kalorije) {
-        this.kalorije = kalorije;
+    	if(kalorije<100) throw new IllegalArgumentException("Broj kalorija mora biti veci od 100");
+    	else this.kalorije = kalorije;
     }
     /**
      * Vraca id obroka.
@@ -89,7 +92,9 @@ public class Obrok implements GenericEntity{
      * @param naziv Naziv obroka kao String.
      */
     public void setNaziv(String naziv) {
-        this.naziv = naziv;
+    	if(naziv==null) throw new NullPointerException();
+    	else if(naziv.length()<4) throw new IllegalArgumentException("Naziv obroka nije kompletan i mora biti duzi od 4 karaktera.");
+    	else this.naziv = naziv;
     }
     /**
      * Vraca String o nazivu obroka.

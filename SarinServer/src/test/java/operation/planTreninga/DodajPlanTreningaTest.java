@@ -29,7 +29,7 @@ import operation.planIshrane.DodajPlanIshrane;
 import operation.planIshrane.PretraziPlanoveIshrane;
 import repository.db.DbConnectionFactory;
 
-class DodajPlanTreningaTest {
+public class DodajPlanTreningaTest {
 
 	private static DodajPlanTreninga dodajPlanTreninga;
 	private PlanTreninga planTreninga;

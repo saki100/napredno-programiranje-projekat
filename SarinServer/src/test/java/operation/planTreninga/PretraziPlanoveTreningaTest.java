@@ -21,7 +21,7 @@ import domain.PlanTreninga;
 import domain.TipPlanaTreninga;
 import form.DBConfigModel;
 
-class PretraziPlanoveTreningaTest {
+public class PretraziPlanoveTreningaTest {
 
 	private static PretraziPlanoveTreninga pretraziPlanoveTreninga;
 	

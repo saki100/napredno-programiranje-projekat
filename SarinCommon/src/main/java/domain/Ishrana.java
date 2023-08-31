@@ -48,10 +48,12 @@ public class Ishrana implements GenericEntity {
      * @param dan          Dan u nedelji kao Dan.
      */
     public Ishrana(PlanIshrane planIshrane, Obrok obrok, VremeObroka vreme, Dan dan) {
-        this.planIshrane = planIshrane;
+        /*this.planIshrane = planIshrane;
         this.obrok = obrok;
         this.vreme = vreme;
-        this.dan = dan;
+        this.dan = dan;*/
+    	
+    	setPlanIshrane(planIshrane); setObrok(obrok); setVreme(vreme); setDan(dan);
         
     }
     /**
@@ -67,7 +69,8 @@ public class Ishrana implements GenericEntity {
      * @param planIshrane Plan ishrane za odredjenog clana sportskog kluba kao PlanIshrane.
      */
     public void setPlanIshrane(PlanIshrane planIshrane) {
-        this.planIshrane = planIshrane;
+    	if(planIshrane==null) throw new NullPointerException();
+    	else this.planIshrane = planIshrane;
     }
    /**
     * Vraca obrok koji ce se konzumirati.
@@ -83,7 +86,8 @@ public class Ishrana implements GenericEntity {
      * @param obrok Obrok koji ce se konzumirati kao Obrok.
      */
     public void setObrok(Obrok obrok) {
-        this.obrok = obrok;
+    	if(obrok==null) throw new NullPointerException();
+    	else this.obrok = obrok;
     }
     /**
      * Vraca da li se obrok jede za dorucak, rucak, veceru ili uzinu kao VremeObroka.

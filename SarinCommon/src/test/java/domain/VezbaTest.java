@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class VezbaTest {
+public class VezbaTest {
 
 	private ResultSet rs;
 	private Vezba vezba;
@@ -34,14 +34,18 @@ class VezbaTest {
      assertEquals("Sklekovi", vezba.getNaziv());
 	}
     @Test
-    public void testgetVezbaID() {
+    public void testSetVezbaID() {
     	vezba.setVezbaID(2L);
     	assertEquals(2L, vezba.getVezbaID());
     }
 	@Test
-	public void testGetNaziv() {
+	public void testSetNazivOK() {
 		vezba.setNaziv("Sklekovi");
 	     assertEquals("Sklekovi", vezba.getNaziv());
+	}
+	@Test 
+	public void setNazivNull() {
+		assertThrows(java.lang.NullPointerException.class, () -> vezba.setNaziv(null));
 	}
 	@Test
 	public void testGetTableName() {

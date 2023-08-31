@@ -20,7 +20,7 @@ import controller.Controller;
 import domain.Clan;
 import form.DBConfigModel;
 
-class PretraziClanaTest {
+public class PretraziClanaTest {
 
 	private static PretraziClana pretraziClana;
 	private Clan clan;

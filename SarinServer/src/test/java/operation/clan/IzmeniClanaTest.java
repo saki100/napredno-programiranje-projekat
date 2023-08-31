@@ -1,20 +1,14 @@
 package operation.clan;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Properties;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -26,12 +20,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import domain.Clan;
 import domain.Grad;
-import domain.Ishrana;
 import form.DBConfigModel;
-import operation.planIshrane.IzmeniPlanIshrane;
-import repository.db.DbConnectionFactory;
 
-class IzmeniClanaTest {
+public class IzmeniClanaTest {
 
 	private static IzmeniClana izmeniClana;
 	private Clan clan;

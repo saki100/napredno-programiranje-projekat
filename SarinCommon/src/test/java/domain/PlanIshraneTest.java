@@ -17,7 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class PlanIshraneTest {
+public class PlanIshraneTest {
 
 	private ResultSet rs;
 	private PlanIshrane planIshrane;
@@ -34,7 +34,7 @@ class PlanIshraneTest {
 	}
 
 	@Test
-	void testKonstruktor() {
+	public void testKonstruktor() {
 		Date datumOd= Date.from(LocalDate.of(2023, 6, 1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 		Date datumDo= Date.from(LocalDate.of(2023, 7, 1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 		Date datumRodjenja=Date.from(LocalDate.of(2000, 5, 12).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
@@ -50,33 +50,39 @@ class PlanIshraneTest {
 	}
 
 	@Test
-	public void testGetIshranaID(){
+	public void testSetIshranaID(){
 	planIshrane.setIshranaID(88);
     assertEquals(88, planIshrane.getIshranaID());
 	}
 	
 	@Test
-	public void testGetTip() {
+	public void testSetTip() {
 		planIshrane.setTip(TipPlanaIshrane.NORMALNA);
         assertEquals(TipPlanaIshrane.NORMALNA, planIshrane.getTip());
 	}
 	
 	@Test
-	public void testGetDatumOd(){
+	public void testSetDatumOdOK(){
 		Date datumOd= Date.from(LocalDate.of(2023, 6, 1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         planIshrane.setDatumOd(datumOd);
         assertEquals(datumOd, planIshrane.getDatumOd());
 	}
 	@Test
-	public void testGetDatumDo() {
+	public void testSetDatumOdNull(){
+		assertThrows(java.lang.NullPointerException.class, () -> planIshrane.setDatumOd(null));
+	}
+	@Test
+	public void testSetDatumDoOK() {
 		Date datumDo= Date.from(LocalDate.of(2023, 7, 1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         planIshrane.setDatumDo(datumDo);
         assertEquals(datumDo, planIshrane.getDatumDo());
-
-
 	}
 	@Test
-	public void testGetClan() {
+	public void testSetDatumDoNull(){
+		assertThrows(java.lang.NullPointerException.class, () -> planIshrane.setDatumDo(null));
+	}
+	@Test
+	public void testSetClan() {
 		Date datumRodjenja=Date.from(LocalDate.of(2000, 5, 12).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 		Grad grad = new Grad(1l, "Beograd");
 		Clan clan = new Clan(123L, "Pera", "Peric", "pera@gmail.com", datumRodjenja, "+3811234567", grad);
@@ -84,7 +90,11 @@ class PlanIshraneTest {
        assertEquals(clan, planIshrane.getClan());
 	}
 	@Test
-	public void testGetStatus() {
+	public void testSetClanNull() {
+		assertThrows(java.lang.NullPointerException.class, () -> planIshrane.setClan(null));
+	}
+	@Test
+	public void testSetStatus() {
 		Status status=Status.INSERT;
 		planIshrane.setStatus(status);
 		assertEquals(Status.INSERT, planIshrane.getStatus());

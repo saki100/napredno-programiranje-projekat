@@ -20,7 +20,7 @@ import domain.Obrok;
 import form.DBConfigModel;
 import operation.clan.IzmeniClana;
 
-class IzmeniObrokTest {
+public class IzmeniObrokTest {
 	
 	private static IzmeniObrok izmeniObrok;
 	private Obrok obrok;

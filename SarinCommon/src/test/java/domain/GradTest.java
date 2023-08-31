@@ -14,19 +14,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class GradTest {
+  public class GradTest {
 
 	private ResultSet rs;
+	//private Grad grad=new Grad();
 	private Grad grad;
-	
 
 	@BeforeEach
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		grad=new Grad();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		grad=null;
 	}
 

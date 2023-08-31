@@ -15,24 +15,23 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-class TrenerTest {
+public class TrenerTest {
 
 	private ResultSet rs;
 	private Trener trener;
 
 	@BeforeEach
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		trener=new Trener();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		trener=null;
 	}
 
 	@Test
-	void testKonstruktor() {
+	public void testKonstruktor() {
 		trener =new Trener(7L, "Filip","Filipovic","filip10","password");
 		
 		assertEquals(7L, trener.getId());
@@ -42,29 +41,63 @@ class TrenerTest {
 		assertEquals("password", trener.getPassword());
 	}
 	@Test
-	public void testGetID() {
+	public void testSetID() {
 		trener.setId(7L);
 		assertEquals(7L, trener.getId());
 	}
 	@Test
-	public void testGetIme() {
+	public void testSetImeOK() {
 		trener.setIme("Filip");;
 		assertEquals("Filip", trener.getIme());
 	}
 	@Test
-	public void testGetPrezime() {
+	public void testSetImeNeispravno() {
+		assertThrows(java.lang.IllegalArgumentException.class, () -> trener.setIme("Im"));
+		assertThrows(java.lang.IllegalArgumentException.class, () -> trener.setIme(""));
+	}
+	@Test
+	public void testSetImeNUll() {
+		assertThrows(java.lang.NullPointerException.class, () -> trener.setIme(null));
+	}
+	@Test
+	public void testSetPrezimeOK() {
 		trener.setPrezime("Filipovic");
 		assertEquals("Filipovic", trener.getPrezime());
 	}
 	@Test
-	public void testGetUsername() {
+	public void testSetPrezimeNeispravno() {
+		assertThrows(java.lang.IllegalArgumentException.class, () -> trener.setPrezime("Pr"));
+		assertThrows(java.lang.IllegalArgumentException.class, () -> trener.setPrezime(""));
+	}
+	@Test
+	public void testSetPrezimeNUll() {
+		assertThrows(java.lang.NullPointerException.class, () -> trener.setPrezime(null));
+	}
+	@Test
+	public void testSetUsernameOK() {
 		trener.setUsername("filip10");
 		assertEquals("filip10", trener.getUsername());
 	}
 	@Test
-	public void testGetPassword() {
+	public void testSetUsernameNUll() {
+		assertThrows(java.lang.NullPointerException.class, () -> trener.setUsername(null));
+	}
+	@Test
+	public void testSetUsernameNeispravno() {
+		assertThrows(java.lang.IllegalArgumentException.class, () -> trener.setUsername("los"));
+	}
+	@Test
+	public void testSetPasswordOK() {
 		trener.setPassword("password");
 		assertEquals("password", trener.getPassword());
+	}
+	@Test
+	public void testSetPasswordNUll() {
+		assertThrows(java.lang.NullPointerException.class, () -> trener.setPassword(null));
+	}
+	@Test
+	public void testSetPasswordNeispravno() {
+		assertThrows(java.lang.IllegalArgumentException.class, () -> trener.setPassword("los"));
 	}
 	@Test
 	public void testGetToString() {

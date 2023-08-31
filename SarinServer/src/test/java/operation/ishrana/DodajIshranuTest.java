@@ -29,7 +29,7 @@ import form.DBConfigModel;
 import operation.obrok.PretraziObrok;
 import repository.db.DbConnectionFactory;
 
-class DodajIshranuTest {
+public class DodajIshranuTest {
 
 	private static DodajIshranu dodajIshranu;
 	private Ishrana ishrana;

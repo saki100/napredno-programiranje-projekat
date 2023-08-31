@@ -25,7 +25,7 @@ import domain.TipPlanaTreninga;
 import form.DBConfigModel;
 import operation.planIshrane.IzmeniPlanIshrane;
 
-class IzmeniPlanTreningaTest {
+public class IzmeniPlanTreningaTest {
 	
 	private static IzmeniPlanTreninga izmeniPlanTreninga;
 	private PlanTreninga planTreninga;

@@ -20,7 +20,7 @@ import domain.Obrok;
 import form.DBConfigModel;
 import operation.clan.IzmeniClana;
 
-class UcitajListuObrokaTest {
+public class UcitajListuObrokaTest {
 
 	private static UcitajListuObroka ucitajListuObroka;
 	

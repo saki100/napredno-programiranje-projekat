@@ -54,11 +54,13 @@ public class PlanTreninga implements GenericEntity{
     * @param clan       Clan za koga je plan treninga namenjen.
     */
     public PlanTreninga(long treningID, TipPlanaTreninga tip, Date datumOD, Date datumDO, Clan clan) {
-        this.treningID = treningID;
+       /* this.treningID = treningID;
         this.tip = tip;
         this.datumOD = datumOD;
         this.datumDO = datumDO;
-        this.clan = clan;
+        this.clan = clan;*/
+    	
+    	setTreningID(treningID);setTip(tip);setDatumDO(datumDO);setDatumOD(datumOD);setClan(clan);
     }
 
    
@@ -108,7 +110,8 @@ public class PlanTreninga implements GenericEntity{
      * @param datumOd Datum od kada vazi plan treninga kao Date.
      */
     public void setDatumOD(Date datumOD) {
-        this.datumOD = datumOD;
+    	if(datumOD==null) throw new NullPointerException();
+    	else this.datumOD = datumOD;
     }
     /**
      * Vraca datum do kog traje plan treninga.
@@ -124,7 +127,8 @@ public class PlanTreninga implements GenericEntity{
      * @param datumDo Datum do kog traje plan treninga kao Date.
      */
     public void setDatumDO(Date datumDO) {
-        this.datumDO = datumDO;
+    	if(datumDO==null) throw new NullPointerException();
+    	else this.datumDO = datumDO;
     }
     /**
      * Vraca clana kome je plan treninga namenjen.
@@ -140,7 +144,8 @@ public class PlanTreninga implements GenericEntity{
      * @param clan Clan komem je namenjen plan treninga kao Clan.
      */
     public void setClan(Clan clan) {
-        this.clan = clan;
+    	if(clan==null) throw new NullPointerException();
+    	else this.clan = clan;
     }
     /**
      * Vraca status plana treninga.

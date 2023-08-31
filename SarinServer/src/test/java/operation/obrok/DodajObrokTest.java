@@ -21,7 +21,7 @@ import domain.Obrok;
 import form.DBConfigModel;
 import repository.db.DbConnectionFactory;
 
-class DodajObrokTest {
+public class DodajObrokTest {
 
 	private static DodajObrok dodajObrok;
 	private Obrok obrok;

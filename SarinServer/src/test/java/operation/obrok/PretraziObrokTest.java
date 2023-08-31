@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.Obrok;
 import form.DBConfigModel;
 
-class PretraziObrokTest {
+public class PretraziObrokTest {
 	
 	private static PretraziObrok pretraziObrok;
 	private Obrok obrok;

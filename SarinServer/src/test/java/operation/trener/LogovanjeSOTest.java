@@ -37,7 +37,7 @@ import org.mockito.Mockito;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-class LogovanjeSOTest {
+public class LogovanjeSOTest {
 
 	private static LogovanjeSO logovanjeSO;
 	private Trener trener;
